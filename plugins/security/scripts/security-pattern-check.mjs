@@ -95,7 +95,10 @@ function checkSecrets(targets) {
 function checkGhActionsPinning(targets) {
   for (const { file, lineNo, text } of targets) {
     if (!/^\.github\/workflows\/.*\.ya?ml$/.test(file)) continue
-    const m = text.match(/uses:\s*(\S+)/)
+    // 行頭(の`- `)からのYAMLキーのみを対象にする。アンカー無しだと、
+    // run:ブロック内のシェル文字列中に偶然"uses:"を含む行(grepパターン文字列等)
+    // を実際のaction参照と誤認識する。
+    const m = text.match(/^\s*(?:-\s*)?uses:\s*(\S+)/)
     if (!m) continue
     const token = m[1]
     if (token.startsWith('./') || token.startsWith('docker://')) continue
