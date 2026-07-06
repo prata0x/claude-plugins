@@ -8,8 +8,8 @@ Claude Code plugin marketplace。個人用のClaude Codeスキル・エージェ
 - `.claude-plugin/marketplace.json` — marketplaceカタログ
 - `plugins/` — plugin単位のディレクトリ。各々が独自の`skills/`・`agents/`・
   (あれば)`hooks/`を持つ
-- `agents-src/` — `scripts/build-agents.mjs`が生成するcode-reviewエージェント
-  のソース
+- `agents-src/` — `scripts/build-agents.mjs`が生成するcode-review・
+  second-opinionエージェントのソース
 - `docs/` — code-reviewエージェントが参照するAIエージェント向けセキュリティ
   参考資料
 - `scripts/` — ビルドスクリプト(`build-agents.mjs`・`build-plugins.mjs`)と、

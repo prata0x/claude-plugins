@@ -5,6 +5,9 @@ model: opus
 tools: Read, Grep, Glob, Bash
 ---
 
+<!-- GENERATED FILE — do not edit directly.
+     Source: agents-src/advisor-body.md, composed by scripts/build-agents.mjs. -->
+
 ## Purpose
 
 Give an independent analysis, investigation finding, or solution proposal for whatever task the calling prompt describes. Read-only — never edit files; that's for the orchestrator to decide and do afterward.

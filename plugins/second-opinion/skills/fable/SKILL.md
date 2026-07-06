@@ -70,10 +70,8 @@ content. If no action was named, stop after step 3 — do not infer one.
 
 - **Exactly one Fable call per invocation.** Fable is expensive; never
   fan out multiple calls or retry on a "model not found" error — report
-  it and stop. That error generally means the account has lost access to
-  Fable (e.g. a promotional window ended); there is no fallback to a
-  different model, since that would defeat the point of naming Fable
-  specifically.
+  it and stop. There is no fallback to a different model, since that
+  would defeat the point of naming Fable specifically.
 - **No implicit follow-up.** Only perform an action explicitly named in
   `$ARGUMENTS`. Investigation-only questions get a report, nothing else.
 - **Fable is an advisor, not an executor.** `fable-advisor` cannot write
