@@ -1,0 +1,3 @@
+tmp/
+.claude/*.lock
+.claude/settings.local.json

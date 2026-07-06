@@ -1,0 +1,8 @@
+{
+  "name": "comment",
+  "description": "Pre-commit hook that blocks stale-risk comment patterns in staged additions, plus an occasional project-wide comment-audit skill for leakage/narration issues the hook's regex can't catch.",
+  "version": "0.1.0",
+  "author": {
+    "name": "prata0x"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "prata0x-plugins",
+  "owner": {
+    "name": "prata0x"
+  },
+  "description": "Personal Claude Code skills and agents",
+  "plugins": [
+    {
+      "name": "tdd",
+      "source": "./plugins/tdd",
+      "description": "Test-first (red-green-refactor) implementation flow skill."
+    },
+    {
+      "name": "code-review",
+      "source": "./plugins/code-review",
+      "description": "Pre-commit and pre-merge code review skills and agents."
+    },
+    {
+      "name": "handoff",
+      "source": "./plugins/handoff",
+      "description": "Session handoff and resume skills."
+    },
+    {
+      "name": "security",
+      "source": "./plugins/security",
+      "description": "Project-wide security audit skill and agents, plus a commit-time mechanical security pattern hook."
+    },
+    {
+      "name": "second-opinion",
+      "source": "./plugins/second-opinion",
+      "description": "Delegate read-only review/investigation tasks to GitHub Copilot CLI or OpenAI Codex CLI directly, or trigger the autonomous copilot -> codex -> opus fallback chain for a second opinion."
+    },
+    {
+      "name": "align",
+      "source": "./plugins/align",
+      "description": "Pre-implementation alignment and spec-sketch skill."
+    },
+    {
+      "name": "comment",
+      "source": "./plugins/comment",
+      "description": "Pre-commit hook that blocks stale-risk comment patterns in staged additions, plus an occasional project-wide comment-audit skill for leakage/narration issues the hook's regex can't catch."
+    }
+  ]
+}

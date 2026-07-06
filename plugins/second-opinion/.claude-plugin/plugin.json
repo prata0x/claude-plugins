@@ -1,0 +1,8 @@
+{
+  "name": "second-opinion",
+  "description": "Delegate read-only review/investigation tasks to GitHub Copilot CLI or OpenAI Codex CLI directly, or trigger the autonomous copilot -> codex -> opus fallback chain for a second opinion.",
+  "version": "0.1.0",
+  "author": {
+    "name": "prata0x"
+  }
+}

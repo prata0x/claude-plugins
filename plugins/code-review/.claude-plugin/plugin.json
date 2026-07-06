@@ -1,0 +1,8 @@
+{
+  "name": "code-review",
+  "description": "Pre-commit and pre-merge code review skills and agents.",
+  "version": "0.1.0",
+  "author": {
+    "name": "prata0x"
+  }
+}

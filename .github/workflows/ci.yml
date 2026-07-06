@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Verify actions are SHA-pinned
+        run: |
+          bad=$(grep -rEn '^[[:space:]]*uses:[[:space:]]' .github/workflows | grep -vE '@[0-9a-f]{40}' || true)
+          if [ -n "$bad" ]; then
+            echo "::error::Action(s) not pinned to a 40-char commit SHA:"
+            echo "$bad"
+            exit 1
+          fi
+
+      - name: Rebuild generated agents and check for drift
+        run: |
+          node ./scripts/build-agents.mjs
+          if ! git diff --exit-code -- plugins/code-review/agents/; then
+            echo "::error::plugins/code-review/agents/ is out of date relative to agents-src/*.md." >&2
+            echo "::error::Run scripts/build-agents.mjs and commit the result." >&2
+            exit 1
+          fi
+
+      - name: Rebuild shared plugin resources and check for drift
+        run: |
+          node ./scripts/build-plugins.mjs
+          if ! git diff --exit-code -- plugins/; then
+            echo "::error::plugins/ is out of date relative to agents-src/*.md or scripts/*." >&2
+            echo "::error::Run scripts/build-plugins.mjs and commit the result." >&2
+            exit 1
+          fi
+
+      - name: Run mechanical security pattern scan
+        run: node ./scripts/security-pattern-check.mjs
+
+      - name: Validate plugin manifests
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude plugin validate . --strict

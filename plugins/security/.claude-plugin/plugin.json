@@ -1,0 +1,8 @@
+{
+  "name": "security",
+  "description": "Project-wide security audit skill and agents, plus a commit-time mechanical security pattern hook.",
+  "version": "0.1.0",
+  "author": {
+    "name": "prata0x"
+  }
+}
