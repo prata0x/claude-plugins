@@ -1,0 +1,8 @@
+{
+  "name": "project",
+  "description": "Project-wide issue-discovery audit skill and agents — AI-agent friction (CLAUDE.md/docs drift) plus end-user product gaps.",
+  "version": "0.1.0",
+  "author": {
+    "name": "prata0x"
+  }
+}
