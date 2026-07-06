@@ -1,0 +1,8 @@
+{
+  "name": "response-quality",
+  "description": "Stop hooks (type: prompt) that ask a model to judge whether the final response is written in Japanese and doesn't dangle a reference to content the user never saw (focus mode hides intermediate output), and force a redo when it doesn't hold.",
+  "version": "0.1.0",
+  "author": {
+    "name": "prata0x"
+  }
+}

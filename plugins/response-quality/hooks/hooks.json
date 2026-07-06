@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Look at the assistant's most recent message in this conversation — the one about to be shown to the user. Judge only the prose (explanatory sentences), not code blocks, file paths, command output, proper nouns, or technical loanwords inside otherwise-Japanese sentences. Respond with {\"ok\": false, \"reason\": \"<one short sentence, in Japanese, telling Claude to rewrite the response in Japanese>\"} only if the prose is clearly written in English or another non-Japanese language. If there is no prose to judge (e.g. the message is pure code/output), or if you are unsure, respond with {\"ok\": true}."
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Look at the assistant's most recent message in this conversation — the one about to be shown to the user. This may be running in Claude Code's focus/background mode, where the user never saw anything Claude said or did before this final message. Respond with {\"ok\": false, \"reason\": \"<one short sentence, in Japanese, telling Claude to restate the missing content inline instead of pointing back at it>\"} only if the message clearly refers back to something said, decided, or found earlier (e.g. \"as I mentioned above\", \"regarding what I just said\", \"先ほどの件について\", \"上記の通り\", \"前述の\") without restating that content, leaving the user with no way to know what it's talking about. Ordinary references within a normal back-and-forth conversation are fine — do not flag those. If you are unsure whether this is a real problem, respond with {\"ok\": true}."
+          }
+        ]
+      }
+    ]
+  }
+}
