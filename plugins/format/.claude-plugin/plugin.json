@@ -1,0 +1,8 @@
+{
+  "name": "format",
+  "description": "Auto-formats edited files with whatever formatter the target project already has configured; does nothing when none is set up.",
+  "version": "0.1.0",
+  "author": {
+    "name": "prata0x"
+  }
+}

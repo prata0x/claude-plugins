@@ -49,6 +49,16 @@
       "name": "triage",
       "source": "./plugins/triage",
       "description": "Turns high-confidence findings from security-audit / comment-audit / project-audit into GitHub issues — verifies against the live repo, dedupes against open issues, and creates/comments only after explicit approval."
+    },
+    {
+      "name": "format",
+      "source": "./plugins/format",
+      "description": "Auto-formats edited files with whatever formatter the target project already has configured; does nothing when none is set up."
+    },
+    {
+      "name": "response-quality",
+      "source": "./plugins/response-quality",
+      "description": "Stop hooks (type: prompt) that judge whether the final response is written in Japanese and doesn't dangle a reference to content the user never saw, and force a redo when it doesn't hold."
     }
   ]
 }
