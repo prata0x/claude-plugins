@@ -39,6 +39,16 @@
       "name": "comment",
       "source": "./plugins/comment",
       "description": "Pre-commit hook that blocks stale-risk comment patterns in staged additions, plus an occasional project-wide comment-audit skill for leakage/narration issues the hook's regex can't catch."
+    },
+    {
+      "name": "project",
+      "source": "./plugins/project",
+      "description": "Project-wide issue-discovery audit skill and agents — AI-agent friction (CLAUDE.md/docs drift) plus end-user product gaps."
+    },
+    {
+      "name": "triage",
+      "source": "./plugins/triage",
+      "description": "Turns high-confidence findings from security-audit / comment-audit / project-audit into GitHub issues — verifies against the live repo, dedupes against open issues, and creates/comments only after explicit approval."
     }
   ]
 }
