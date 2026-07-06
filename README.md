@@ -43,6 +43,7 @@ claude plugin install <plugin名>@prata0x-plugins
 | `comment` | staged追加分のstale-riskなコメントパターンをブロックするpre-commit hook、およびhookのregexでは拾えない漏洩・ナレーション系問題を確認する不定期実行のcomment-audit監査スキル | `claude plugin install comment@prata0x-plugins` |
 | `project` | プロジェクト全体の課題発見監査スキル・エージェント(AIエージェントの作業障害＋利用者視点の product gap) | `claude plugin install project@prata0x-plugins` |
 | `triage` | security-audit/comment-audit/project-auditの高信頼度findingを検証・重複確認した上でGitHub issue化するスキル・エージェント(実行前に承認確認あり) | `claude plugin install triage@prata0x-plugins` |
+| `response-quality` | 最終応答が日本語で書かれているか、focusモードで隠れた中間出力への後方参照が残っていないかをモデル判定するStop hook(`type: "prompt"`) | `claude plugin install response-quality@prata0x-plugins` |
 
 ## CI
 
