@@ -35,7 +35,7 @@ claude plugin install <plugin名>@prata0x-plugins
 | `code-review` | pre-commit / pre-mergeのコードレビュースキル・エージェント | `claude plugin install code-review@prata0x-plugins` |
 | `handoff` | セッションの引き継ぎ・再開スキル | `claude plugin install handoff@prata0x-plugins` |
 | `security` | プロジェクト全体のセキュリティ監査スキル・エージェント、およびcommit時の機械的セキュリティパターンhook | `claude plugin install security@prata0x-plugins` |
-| `second-opinion` | read-onlyのレビュー・調査タスクをGitHub Copilot CLI / OpenAI Codex CLIに委任、またはcopilot→codex→opusの自律fallbackチェーンでセカンドオピニオンを取得 | `claude plugin install second-opinion@prata0x-plugins` |
+| `second-opinion` | read-onlyのレビュー・調査タスクをGitHub Copilot CLI / OpenAI Codex CLIに委任、copilot→codex→opusの自律fallbackチェーンでセカンドオピニオンを取得、または`/fable`・`/opus`で特定タスクをFable/Opusに単発で相談 | `claude plugin install second-opinion@prata0x-plugins` |
 | `align` | 実装前のすり合わせ・spec sketchスキル | `claude plugin install align@prata0x-plugins` |
 | `comment` | staged追加分のstale-riskなコメントパターンをブロックするpre-commit hook、およびhookのregexでは拾えない漏洩・ナレーション系問題を確認する不定期実行のcomment-audit監査スキル | `claude plugin install comment@prata0x-plugins` |
 | `project` | プロジェクト全体の課題発見監査スキル・エージェント(AIエージェントの作業障害＋利用者視点の product gap) | `claude plugin install project@prata0x-plugins` |
