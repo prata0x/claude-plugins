@@ -1,7 +1,7 @@
 {
   "name": "notify-sound",
   "description": "Plays a Windows notification sound from WSL when Claude finishes a turn or asks a question via AskUserQuestion.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "prata0x"
   }

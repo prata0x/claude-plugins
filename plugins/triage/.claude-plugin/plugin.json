@@ -1,7 +1,7 @@
 {
   "name": "triage",
   "description": "Turns high-confidence findings from security-audit / comment-audit / project-audit into GitHub issues — verifies against the live repo, dedupes against open issues, and creates/comments only after explicit approval.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "prata0x"
   }
