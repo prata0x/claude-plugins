@@ -44,6 +44,7 @@ claude plugin install <plugin名>@prata0x-plugins
 | `project` | プロジェクト全体の課題発見監査スキル・エージェント(AIエージェントの作業障害＋利用者視点の product gap) | `claude plugin install project@prata0x-plugins` |
 | `triage` | security-audit/comment-audit/project-auditの高信頼度findingを検証・重複確認した上でGitHub issue化するスキル・エージェント(実行前に承認確認あり) | `claude plugin install triage@prata0x-plugins` |
 | `response-quality` | 最終応答が日本語で書かれているか、focusモードで隠れた中間出力への後方参照が残っていないかをモデル判定するStop hook(`type: "prompt"`) | `claude plugin install response-quality@prata0x-plugins` |
+| `notify-sound` | WSL/Windows環境向けに、ターン終了時・AskUserQuestion待機時にpowershell.exe経由で通知音を鳴らすhook | `claude plugin install notify-sound@prata0x-plugins` |
 
 ## CI
 
