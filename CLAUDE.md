@@ -59,6 +59,6 @@ the body is read by Claude, not the user.
 ## Working norms
 
 - **Do not create artifacts the user did not ask for.** No premature SKILL.md, no speculative refactors. Research first, propose, wait for go-ahead.
-- **Copilot is read-only review.** Never ask Copilot to modify, fix, push, or install. The `copilot` and `copilot-review` skills enforce this; do not work around it.
+- **Copilot is read-only review.** Never ask Copilot to modify, fix, push, or install. The `copilot` skill enforces this; do not work around it.
 - **Skills are decision logic, not tutorials.** ~100 lines, anti-pattern + alternative tables, workflow at a glance. If a section is restating what the agent already knows, cut it.
 - **Reference, do not inline.** Point at `path:line` and commit SHAs; do not paste diffs or full file contents into skills or handoffs.
