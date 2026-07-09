@@ -2,14 +2,18 @@
 // PreToolUse(Write|Edit)フック。書き込み対象が人間読者向けの*.md(記事・README・
 // レポート等)の場合のみ、AI臭を避けるための短いリマインダーをadditionalContext
 // として注入する。Claude Code の指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
-// skills//agents/ 配下)は意図的に簡潔・箇条書き中心のため対象外にする。
+// .claude/skills//agents//rules/ 配下、および本リポジトリのplugin開発レイアウト
+// plugins/<name>/skills//agents/ 配下)は意図的に簡潔・箇条書き中心のため対象外
+// にする。skills/agents/rulesという名前のディレクトリ自体はこの用途と無関係に
+// 存在しうるため、.claude/配下かplugins/<name>/配下のいずれかに限定してマッチ
+// させる。
 //
 // permissionDecisionは返さない — additionalContextはpermissionDecisionと独立に
 // 効くため、権限判定には一切関与せず通常の許可フローに委ねる。stdinのパース失敗や
 // 対象外パスの場合は何も出力せずexit 0(fail-open)。
 
 const EXCLUDE_RE = /(^|\/)(node_modules|vendor|dist|build|out|\.next|target|__pycache__|\.venv|venv|coverage)\//
-const INSTRUCTION_DOC_RE = /(^|\/)(skills|agents)[a-z-]*\/|(^|\/)(SKILL|CLAUDE|AGENTS)\.md$/i
+const INSTRUCTION_DOC_RE = /(^|\/)\.claude\/(skills|agents|rules)\/|(^|\/)plugins\/[^/]+\/(skills|agents)\/|(^|\/)(SKILL|CLAUDE|AGENTS)\.md$/i
 const MD_RE = /\.md$/i
 
 const REMINDER = [

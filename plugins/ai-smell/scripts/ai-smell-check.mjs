@@ -8,8 +8,11 @@
 // 誤検知があっても書き込み自体は妨げない。この辞書は陳腐化が速いため定期的な見直しが要る。
 //
 // 対象は *.md のうち、Claude Code の指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
-// skills//agents/ 配下)を除く — それらは意図的に簡潔・箇条書き中心であり、この
-// チェックの前提(人間読者向けの散文)が成立しない。
+// .claude/skills//agents//rules/ 配下、および本リポジトリのplugin開発レイアウト
+// plugins/<name>/skills//agents/ 配下)を除く — それらは意図的に簡潔・箇条書き
+// 中心であり、このチェックの前提(人間読者向けの散文)が成立しない。skills/agents/
+// rulesという名前のディレクトリ自体はこの用途と無関係に存在しうるため、
+// .claude/配下かplugins/<name>/配下のいずれかに限定してマッチさせる。
 //
 // 判定は物理行単位(ai-comment-check.mjsからの流用)。日本語散文は通常1段落=1論理行
 // でsoft-wrapされるため実害は薄いが、ハードラップされたMarkdownで定型句が行境界を
@@ -34,7 +37,7 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync, statSync } from 'node:fs'
 
 const EXCLUDE_RE = /(^|\/)(node_modules|vendor|dist|build|out|\.next|target|__pycache__|\.venv|venv|coverage)\//
-const INSTRUCTION_DOC_RE = /(^|\/)(skills|agents)[a-z-]*\/|(^|\/)(SKILL|CLAUDE|AGENTS)\.md$/i
+const INSTRUCTION_DOC_RE = /(^|\/)\.claude\/(skills|agents|rules)\/|(^|\/)plugins\/[^/]+\/(skills|agents)\/|(^|\/)(SKILL|CLAUDE|AGENTS)\.md$/i
 const MD_RE = /\.md$/i
 const STAGED_MODE = process.argv.includes('--staged')
 const EDIT_MODE = process.argv.includes('--edit')

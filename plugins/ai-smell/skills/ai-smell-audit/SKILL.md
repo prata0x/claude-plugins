@@ -66,7 +66,9 @@ Do NOT invoke when:
   audit-only; remediation is a separate user decision (or use the
   `tech-doc-writer` / `blog-writer` skills when drafting new prose).
 - The target is a Claude Code instruction file (SKILL.md, CLAUDE.md,
-  AGENTS.md, anything under `skills/` or `agents/`) — those are
+  AGENTS.md, anything under `.claude/skills/`, `.claude/agents/`,
+  `.claude/rules/`, or this repo's own plugin-dev layout
+  `plugins/<name>/skills/`/`plugins/<name>/agents/`) — those are
   deliberately terse and bulleted by convention; this audit's axes don't
   apply.
 
@@ -84,11 +86,11 @@ This lists every in-scope `*.md` file path (same exclusion rules as the
 hook: excludes Claude Code instruction files). Pass explicit path prefixes
 if the user scoped the audit.
 
-**Cap and chunking**: unlike `comment-audit`'s line-based chunking, each
-document is judged as a whole (axis A/B require document-level context).
-If the corpus exceeds ~15 documents, batch them into audit rounds of ~15
-rather than fanning out unbounded parallel agents in one response; record
-the round count in the report's scope section.
+**Cap and chunking**: each document is judged as a whole, not chunked by
+line (axis A/B require document-level context). If the corpus exceeds ~15
+documents, batch them into audit rounds of ~15 rather than fanning out
+unbounded parallel agents in one response; record the round count in the
+report's scope section.
 
 ### 2. Parallel fan-out — 3 axes × N documents
 
@@ -111,9 +113,9 @@ same defect class.
 
 ### 4. Confidence scoring
 
-Same batching discipline as `comment-audit`: ≤ 50 structured findings →
-one `ai-smell-confidence-filter` call; > 50 → parallel chunks of 50 in
-input order, concatenate in chunk order.
+Batch findings for confidence scoring: ≤ 50 structured findings → one
+`ai-smell-confidence-filter` call; > 50 → parallel chunks of 50 in input
+order, concatenate in chunk order.
 
 **Length check (mandatory)**: after concatenating, if
 `len(scores) != len(findings)`, halt and report a confidence-filter
@@ -148,9 +150,11 @@ filter (otherwise the single worst finding overall).
 
 - **Document-level, not line-level.** Axis A and B require reading the
   whole document — never judge from an isolated paragraph.
-- **Excludes Claude Code instruction files.** SKILL.md/CLAUDE.md/AGENTS.md
-  and anything under `skills/`/`agents/` are terse-by-design; this audit's
-  axes would produce false positives there.
+- **Excludes Claude Code instruction files.** SKILL.md/CLAUDE.md/AGENTS.md,
+  anything under `.claude/skills/`, `.claude/agents/`, or `.claude/rules/`,
+  and this repo's own `plugins/<name>/skills/`/`plugins/<name>/agents/`
+  are terse-by-design; this audit's axes would produce false positives
+  there.
 - **Axis A is reported first**, but is scored by the same 80-point
   threshold as B/C — importance changes ordering, not the bar for
   inclusion.
