@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/ai-smell-rule-inject.mjs\""
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/ai-writing-rule-inject.mjs\""
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/ai-smell-check.mjs\" --edit"
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/ai-writing-check.mjs\" --edit"
           }
         ]
       }

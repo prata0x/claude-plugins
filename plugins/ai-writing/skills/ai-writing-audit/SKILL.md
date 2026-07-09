@@ -1,5 +1,5 @@
 ---
-name: ai-smell-audit
+name: ai-writing-audit
 description: >
   Occasional, thorough project-wide audit for AI臭 (AI-generated-text smell)
   in prose documents, covering what fixed-phrase pattern matching
@@ -7,11 +7,11 @@ description: >
   highest priority, per research the root cause behind surface-level
   phrase tics), structural/rhythm monotony (axis B), and formulaic
   paraphrases of known AI-tell phrases (axis C). Uses parallel
-  ai-smell-scanner (opus) sub-agents per axis/document and an
-  ai-smell-confidence-filter (haiku) confidence filter, writing a report
-  to tmp/ai-smell-audit-<date>.md. Trigger phrases — "AI臭監査して",
+  ai-writing-scanner (opus) sub-agents per axis/document and an
+  ai-writing-confidence-filter (haiku) confidence filter, writing a report
+  to tmp/ai-writing-audit-<date>.md. Trigger phrases — "AI臭監査して",
   "書き手の不在チェックして", "AI臭がないか確認して", "文章のAIっぽさをチェックして",
-  "/ai-smell-audit", "audit for AI writing smell", "check these docs for
+  "/ai-writing-audit", "audit for AI writing smell", "check these docs for
   AI slop". Do NOT use for per-edit checking or for continuous in-session
   checks after each write.
 allowed-tools: Agent, Bash, Read, Write
@@ -50,7 +50,7 @@ save-time gate. Output is a written report only; no in-session edits.
 ## When to invoke
 
 - 「AI臭監査して」「書き手の不在チェックして」「文章のAIっぽさを確認して」
-- `/ai-smell-audit` (optionally followed by paths: `/ai-smell-audit docs/ README.md`)
+- `/ai-writing-audit` (optionally followed by paths: `/ai-writing-audit docs/ README.md`)
 - "audit for AI writing smell", "check these docs for AI slop"
 
 Run this after drafting a batch of documents/articles, or periodically
@@ -76,7 +76,7 @@ Do NOT invoke when:
 Run:
 
 ```sh
-node "${CLAUDE_PLUGIN_ROOT}/skills/ai-smell-audit/list-docs.mjs" [path-prefix ...]
+node "${CLAUDE_PLUGIN_ROOT}/skills/ai-writing-audit/list-docs.mjs" [path-prefix ...]
 ```
 
 This lists every in-scope `*.md` file path, excluding AI-agent
@@ -92,7 +92,7 @@ report's scope section.
 ### 2. Parallel fan-out — 3 axes × N documents
 
 For each document, launch 3 parallel Agent calls in a **single response**:
-`subagent_type: ai-smell-scanner`, one per axis (A, B, C), passing the
+`subagent_type: ai-writing-scanner`, one per axis (A, B, C), passing the
 axis letter and the file path. The agent reads the full document itself
 via Read — axis definitions, tool restrictions, and the dictionary
 exclusion list live in the agent itself.
@@ -111,7 +111,7 @@ same defect class.
 ### 4. Confidence scoring
 
 Batch findings for confidence scoring: ≤ 50 structured findings → one
-`ai-smell-confidence-filter` call; > 50 → parallel chunks of 50 in input
+`ai-writing-confidence-filter` call; > 50 → parallel chunks of 50 in input
 order, concatenate in chunk order.
 
 **Length check (mandatory)**: after concatenating, if
@@ -131,7 +131,7 @@ and not filtered.
 
 ### 6. Write report file
 
-Path: `tmp/ai-smell-audit-<YYYY-MM-DD>.md` (workspace `tmp/`, not OS
+Path: `tmp/ai-writing-audit-<YYYY-MM-DD>.md` (workspace `tmp/`, not OS
 `/tmp`; confirm it is gitignored before writing). `mkdir -p tmp/` if
 missing. Overwrite any existing file at the same path.
 
