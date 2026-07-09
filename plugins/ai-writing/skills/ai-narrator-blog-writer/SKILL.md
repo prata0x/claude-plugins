@@ -16,9 +16,10 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ## Purpose
 
 Trying to make AI-written prose pass as human-written is the losing
-strategy — it's what produces the safe, generic, hedge-heavy "AI臭" in the
-first place, and per research, human readers are near-chance at spotting
-it anyway while a statistical classifier catches it with high accuracy.
+strategy — it's what produces safe, generic, hedge-heavy prose that reads
+as AI-generated in the first place, and per research, human readers are
+near-chance at spotting it anyway while a statistical classifier catches
+it with high accuracy.
 The alternative that actually reads as "someone is here": **disclose the
 AI authorship openly and write in first person as the AI**, rather than
 pretending to be a human author.

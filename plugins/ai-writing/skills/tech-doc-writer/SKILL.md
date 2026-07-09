@@ -2,27 +2,33 @@
 name: tech-doc-writer
 description: >
   Drafting guidance for technical documents (README, design docs, reports,
-  postmortems) that avoids AI臭 without adding persona or humor — this is
-  about substance (an actual stance, concrete specifics, varied rhythm),
-  not voice. Trigger phrases — "技術文書を書いて", "READMEを書いて",
+  postmortems): direct, substantive prose — an actual stance, concrete
+  specifics, varied rhythm — with a built-in check against generic,
+  hedge-heavy AI-generated-prose patterns. Not about persona or humor.
+  Trigger phrases — "技術文書を書いて", "READMEを書いて",
   "レポートにまとめて", "設計ドキュメントを書いて", "write a technical doc",
   "write up this design", "draft a report on this". Do NOT use for
   authoring SKILL.md/CLAUDE.md/agent instruction files — those follow this
   repo's own terse, bulleted decision-logic convention, which is the
   opposite of what this skill optimizes for. Do NOT use when the user
   wants a blog-style article with a first-person, personality-driven
-  voice.
+  voice. Do NOT use for a commit message, PR description, issue body, or
+  review comment — those target a reader who is about to read the diff
+  anyway, which is a different failure mode (restating the diff) than
+  technical-document prose.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 ## Purpose
 
-Technical prose (README, design docs, postmortems, PR/issue descriptions)
-reads as AI-generated for a specific, researched reason: **absence of a
-writer** (書き手の不在) — every sentence is a general statement that
-would be equally true of any project, because nothing in it required the
-writer to have actually verified or decided anything specific. Fixing
-surface phrase tics without fixing that is cosmetic.
+Good technical prose (README, design docs, postmortems) commits to
+specific, checkable claims — real numbers, an actual stance the writer
+could be wrong about — instead of hedging in general statements that
+would be equally true of any project. That same gap, absence of a
+writer's actual stance, is also the main way AI-generated technical
+writing gives itself away, so closing it serves both goals at once:
+better prose, and prose that doesn't read as generated. Fixing surface
+phrase tics without fixing that is cosmetic.
 
 This skill is deliberately not about adding personality — a technical
 document should stay direct and register-appropriate. The fix is
