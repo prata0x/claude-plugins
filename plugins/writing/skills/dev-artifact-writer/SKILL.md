@@ -3,18 +3,19 @@ name: dev-artifact-writer
 description: >
   Drafting guidance for commit messages, PR descriptions, issue bodies, and
   PR/issue review comments: substance a reviewer can't already get from
-  the diff — with a built-in check against a genre-specific AI-generated-
-  prose pattern, restating the diff/title in prose instead of adding what
-  a reviewer can't already see. Trigger phrases — "PRの説明を書いて",
-  "コミットメッセージを書いて", "issueを作成して", "issueにまとめて",
-  "PRコメントを書いて", "レビューコメントを返信して", "write a PR description",
-  "write a commit message", "file an issue", "reply to this review
-  comment". Does not cover format/process conventions (Conventional
-  Commits grammar, decision-content-only comment scoping, language
-  choice) — those are separate, already-governed concerns; this skill
-  only fixes AI-generated-sounding substance within whatever format
-  applies. Do NOT use for README/design-doc/report prose or blog
-  articles — those are different registers with a different audience.
+  the diff — with a built-in check against a genre-specific
+  AI-generated-prose pattern, restating the diff/title in prose instead
+  of adding what a reviewer can't already see. Trigger phrases —
+  "PRの説明を書いて", "コミットメッセージを書いて", "issueを作成して",
+  "issueにまとめて", "PRコメントを書いて", "レビューコメントを返信して",
+  "write a PR description", "write a commit message", "file an issue",
+  "reply to this review comment". Does not cover format/process
+  conventions (Conventional Commits grammar, decision-content-only
+  comment scoping, language choice) — those are separate, already-governed
+  concerns; this skill only fixes AI-generated-sounding substance within
+  whatever format applies. Do NOT use for README/design-doc/report prose
+  or blog articles — those are different registers with a different
+  audience.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 

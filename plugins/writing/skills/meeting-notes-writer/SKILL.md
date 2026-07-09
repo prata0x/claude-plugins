@@ -4,14 +4,13 @@ description: >
   Drafting guidance for meeting notes/minutes: an accurate working record
   someone who wasn't there can act on — with a built-in check against a
   genre-specific AI-generated-prose pattern, fabricated completeness
-  (flattening every meeting into the same overview/key-points/
-  action-items template, and inventing owners/deadlines that weren't
-  actually stated). Trigger phrases —
-  "議事録を書いて", "ミーティングをまとめて", "会議のサマリを作って", "write
-  up these meeting notes", "summarize this meeting", "draft the
-  minutes". Do NOT use for a general narrative article about what
-  happened at an event — that's blog-register writing, not a working
-  record meant to be acted on.
+  (flattening every meeting into the same overview/key-points/action-items
+  template, and inventing owners/deadlines that weren't actually stated).
+  Trigger phrases — "議事録を書いて", "ミーティングをまとめて",
+  "会議のサマリを作って", "write up these meeting notes",
+  "summarize this meeting", "draft the minutes". Do NOT use for a general
+  narrative article about what happened at an event — that's
+  blog-register writing, not a working record meant to be acted on.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 

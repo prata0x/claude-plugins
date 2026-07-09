@@ -4,13 +4,14 @@ description: >
   Drafting guidance for general blog articles/posts (any voice — opinion
   piece, tutorial, narrative): a real stance, concrete specifics, varied
   rhythm, no formulaic phrasing — with a built-in check against generic,
-  hedge-heavy AI-generated-prose patterns. Trigger phrases — "ブログ記事を書いて",
-  "記事にして", "この件を記事にまとめて", "write a blog post about this",
-  "turn this into an article", "draft a blog post". Do NOT use for README/design-doc/
-  report prose — that register wants direct, terse writing, not blog
-  voice. Do NOT use when the user explicitly wants the AI itself
-  presented as a disclosed, first-person narrator — that's a different,
-  more specific technique than general blog writing.
+  hedge-heavy AI-generated-prose patterns. Trigger phrases —
+  "ブログ記事を書いて", "記事にして", "この件を記事にまとめて",
+  "write a blog post about this", "turn this into an article",
+  "draft a blog post". Do NOT use for README/design-doc/report prose —
+  that register wants direct, terse writing, not blog voice. Do NOT use
+  when the user explicitly wants the AI itself presented as a disclosed,
+  first-person narrator — that's a different, more specific technique
+  than general blog writing.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
