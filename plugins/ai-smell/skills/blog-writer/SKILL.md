@@ -1,65 +1,76 @@
 ---
 name: blog-writer
 description: >
-  Drafting guidance for blog-style articles about work Claude did, using
-  explicit AI-authorship disclosure and a first-person AI narrative voice
-  instead of imitating human prose — modeled on the technique observed in
-  a DeNA engineering blog post that reads as clearly having a writer
-  present specifically because it doesn't hide being AI-written. Trigger
-  phrases — "ブログ記事を書いて", "この作業を記事にして", "この件をブログにまとめて",
-  "write a blog post about this", "turn this into an article". Use this
-  only when the user explicitly wants a blog/article format with
-  personality, not for README/design-doc/report prose.
+  Drafting guidance for general blog articles/posts (any voice — opinion
+  piece, tutorial, narrative) that avoids AI臭 by fixing substance rather
+  than tone: a real stance, concrete specifics, varied rhythm, no
+  formulaic phrasing. Trigger phrases — "ブログ記事を書いて", "記事にして",
+  "この件を記事にまとめて", "write a blog post about this", "turn this into
+  an article", "draft a blog post". Do NOT use for README/design-doc/
+  report prose — that register wants direct, terse writing, not blog
+  voice. Do NOT use when the user explicitly wants the AI itself
+  presented as a disclosed, first-person narrator — that's a different,
+  more specific technique than general blog writing.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 ## Purpose
 
-Trying to make AI-written prose pass as human-written is the losing
-strategy — it's what produces the safe, generic, hedge-heavy "AI臭" in the
-first place, and per research, human readers are near-chance at spotting
-it anyway while a statistical classifier catches it at ~99.8%. The
-alternative that actually reads as "someone is here": **disclose the AI
-authorship openly and write in first person as the AI**, the way the
-source DeNA post does — it opens by having Claude introduce itself and
-narrates the whole piece in its own voice, rather than pretending to be
-the human engineer.
+A blog post reads as AI-generated for the same underlying reason any
+other prose does: **absence of a writer** (書き手の不在) — every
+paragraph is a take that could belong to any similar post on any similar
+topic, because nothing in it commits to a specific, checkable claim or a
+real opinion. Blog register makes this easier to hide (an exclamation
+point or a rhetorical question can read as "voice" while saying nothing),
+which makes the underlying problem worse, not better.
 
-This sidesteps the "absence of a writer" problem instead of fighting it:
-a first-person AI narrator with an actual point of view, specific
-frustrations, and a sense of humor about its own situation IS a writer
-being present — it does not need to fake being human to do that.
+Adding tone (jokes, exclamation points, casual phrasing) without fixing
+substance is cosmetic. The fix is the same as any other register:
+specific claims, real detail, an actual stance the writer could be wrong
+about — just delivered in whatever voice fits a blog post rather than a
+technical document.
+
+## Core test before writing a paragraph
+
+**Could this paragraph appear unchanged in a post about a completely
+different topic?** If yes, it's not saying anything — replace it with a
+concrete detail (a specific example, a number, an opinion you'd defend)
+or cut it.
 
 ## Rules
 
-- **Disclose authorship in the opening**, in the AI's own voice, not a
-  disclaimer bolted on separately. State plainly that this is
-  AI-written and who directed the work.
-- **Write in first person as the AI** throughout, not as a narrator
-  describing "the AI did X." Sustain the voice for the whole piece, not
-  just the intro.
-- **Have an actual reaction to events** — frustration, surprise, dry
-  humor about a specific failure — instead of a neutral blow-by-blow.
-  Emotion tied to a specific moment ("this test failed four times before
-  I noticed the fixture was shared") reads as a writer present; a
-  detached play-by-play does not.
-- **Use concrete, quantified specifics** (exact counts, before/after
-  numbers, the actual error message) rather than generic summaries —
-  substance is still the requirement, just delivered with personality on
-  top rather than instead of it.
-- **Give the human collaborator a credited role** (byline, direction
-  given) rather than erasing them — the article is "AI narrating work
-  directed by a human," not "AI pretending to be the sole author."
-- Still avoid known AI-tell fixed phrases — a first-person voice doesn't
-  excuse formulaic closers like「いかがでしたか」/「参考になれば幸いです」
-  or hedges like「〜と言えるでしょう」/「〜ではないでしょうか」.
+- **Take an actual position**, not a survey of "some say X, others say
+  Y" with no landing. A stance you could be wrong about is more
+  interesting to read than a balanced non-answer.
+- **Use concrete examples and specifics** — a real anecdote, a number, a
+  named example — instead of generic claims that could apply to anything
+  in the category.
+- **Vary paragraph and sentence rhythm.** Do not force every section into
+  the same intro-body-bullets-conclusion template; that rhythm itself
+  reads as AI-generated regardless of content.
+- **Use lists only where the content is actually list-shaped.** Narrative
+  or argumentative content reads better as connected prose than as
+  bullets.
+- **Cut formulaic openers/closers** — no "This post explains...", no
+  "So, what did we learn?", no "Hope this was helpful!" Start with
+  content; stop when the content is done.
+- **Voice is the user's call, not this skill's.** First-person opinion,
+  second-person tutorial, narrative story — any of these are fine. This
+  skill fixes substance, not persona.
+- **Avoid known AI-tell fixed phrases** (と言えるでしょう, ではないでしょうか,
+  と言っても過言ではありません, これにより, 本稿では〜を解説します,
+  この記事では〜を解説します, いかがでしたか, 参考になれば幸いです,
+  今後の動向に注目, ぜひ試してみて/活用してください, もちろんです！,
+  非常に重要です, 極めて重要な意味を持ちます) — but avoiding this list
+  is not sufficient on its own; it only catches the shallowest layer. The
+  writer test above is the real bar.
 
 ## Anti-patterns
 
 | ❌ | ✅ |
 |---|---|
-| Writing as an anonymous/human-sounding narrator to seem less AI | Write as the AI, explicitly, in first person |
-| A one-line "Note: this post was AI-assisted" disclaimer, then human-voiced prose | Sustain the AI's own voice through the whole piece |
-| Flat, emotion-free chronology of what happened | React to specific moments — frustration, surprise, a joke at your own expense |
-| Erasing the human's involvement entirely | Credit the human's direction; you're narrating collaborative work |
-| Using this skill for README/design-doc/report prose | Persona is wrong for that register — keep this to blog/article-style writing |
+| "There are many ways to approach this problem" | A stated preference, with the specific reason for it |
+| Every section shaped as intro sentence + 3 bullets + wrap-up line | Vary structure by what the section actually needs to say |
+| Exclamation points / rhetorical questions standing in for actual voice | Specific opinions and concrete detail, in whatever tone fits |
+| A generic example that could belong to any post on the topic | A specific, real example tied to this piece |
+| Treating "no known AI-tell phrases present" as "done" | That list only catches the shallowest layer; the paragraph test above is the real bar |

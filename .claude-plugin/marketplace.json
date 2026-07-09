@@ -63,7 +63,7 @@
     {
       "name": "ai-smell",
       "source": "./plugins/ai-smell",
-      "description": "Reduces AI臭 in Japanese prose documents/articles: a pre-write context nudge, a fixed-phrase mechanical hook, an occasional project-wide audit skill for absence-of-writer/rhythm issues, and writer skills for technical docs and blog-style articles."
+      "description": "Reduces AI臭 in Japanese prose documents/articles: a pre-write context nudge, a fixed-phrase mechanical hook, an occasional project-wide audit skill for absence-of-writer/rhythm issues, and writer skills for technical docs, general blog articles, and AI-narrated blog articles."
     }
   ]
 }
