@@ -2,7 +2,7 @@
 name: ai-smell-scanner
 description: Single-axis AI-smell scanner for a prose document (absence-of-writer stance, structural/rhythm monotony, or formulaic paraphrase invisible to the fixed-phrase dictionary). Dispatched per axis x document by the ai-smell-audit skill. Not typically invoked directly by user phrasing.
 model: opus
-tools: Bash, Read, Grep, Glob
+tools: Read
 ---
 
 ## Purpose
