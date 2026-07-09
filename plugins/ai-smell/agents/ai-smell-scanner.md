@@ -58,10 +58,14 @@ article...", generic wrap-up, unearned emphasis) but is phrased
 differently enough to evade the fixed-phrase regex.
 
 - Do not flag any phrase the dictionary already catches — check against
-  the known list (これにより, と言えるでしょう,
-  ではないでしょうか, 本稿では〜を解説します, いかがでしたか,
-  参考になれば幸いです, 今後の動向に注目, もちろんです！, 非常に重要です)
-  before flagging; re-flagging those here is duplicate noise.
+  the known list (と言えるでしょう, ではないでしょうか,
+  と言っても過言ではありません, これにより, 本稿では〜を解説します,
+  この記事では〜を解説します, いかがでしたか, 参考になれば幸いです,
+  今後の動向に注目, ぜひ試してみて/活用してください, もちろんです！,
+  非常に重要です, 極めて重要な意味を持ちます) before flagging;
+  re-flagging those here is duplicate noise. This list must stay in sync
+  with `PATTERNS` in `scripts/ai-smell-check.mjs` — if the dictionary
+  changes, update this list too.
 - **IS a violation**: a same-function paraphrase, e.g. "この文章を通じて〜を
   お伝えできればと思います" (paraphrase of a formulaic opener) or "少しでも
   お役に立てば嬉しいです" (paraphrase of a formulaic closer).

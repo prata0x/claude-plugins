@@ -56,11 +56,13 @@ weighed) or cut it.
   "In conclusion...", no "I hope this is helpful." Start with the
   content; stop when the content is done.
 - **Avoid the fixed-phrase dictionary** the `ai-smell-check.mjs` hook
-  flags (これにより, と言えるでしょう,
-  ではないでしょうか, 本稿では〜を解説します, いかがでしたか,
-  参考になれば幸いです, 今後の動向に注目, もちろんです！, 非常に重要です)
-  — but do not treat "the hook didn't flag it" as proof the prose is
-  fine; the hook only catches the shallowest layer.
+  flags (と言えるでしょう, ではないでしょうか, と言っても過言ではありません,
+  これにより, 本稿では〜を解説します, この記事では〜を解説します,
+  いかがでしたか, 参考になれば幸いです, 今後の動向に注目,
+  ぜひ試してみて/活用してください, もちろんです！, 非常に重要です,
+  極めて重要な意味を持ちます) — but do not treat "the hook didn't flag
+  it" as proof the prose is fine; the hook only catches the shallowest
+  layer.
 
 ## Anti-patterns
 
