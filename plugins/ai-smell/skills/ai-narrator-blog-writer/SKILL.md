@@ -4,7 +4,7 @@ description: >
   Drafting guidance for blog articles where the AI itself is the openly
   disclosed, first-person author — not a general blog-writing skill, and
   not about imitating human authorship. Trigger phrases — "AI自身の視点で
-  記事を書いて", "AIの一人称で記事にして", "Claudeが書いたとわかる記事にして",
+  記事を書いて", "AIの一人称で記事にして", "AIが書いたとわかる記事にして",
   "write this as yourself, as the AI", "narrate this as the AI author",
   "write in your own voice as the AI". Use this only when the user
   explicitly wants the AI itself presented as the disclosed narrator — for

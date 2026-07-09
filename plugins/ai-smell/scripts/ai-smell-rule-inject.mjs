@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // PreToolUse(Write|Edit)フック。書き込み対象が人間読者向けの*.md(記事・README・
 // レポート等)の場合のみ、AI臭を避けるための短いリマインダーをadditionalContext
-// として注入する。Claude Code の指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
+// として注入する。AIエージェントの指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
 // .claude/skills//agents//rules/ 配下、および本リポジトリのplugin開発レイアウト
 // plugins/<name>/skills//agents/ 配下)は意図的に簡潔・箇条書き中心のため対象外
 // にする。skills/agents/rulesという名前のディレクトリ自体はこの用途と無関係に

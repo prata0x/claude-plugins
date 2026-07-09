@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ai-smell-audit skill用。tracked *.md のうち、人間読者向けの散文文書(記事・README・
-// レポート等)のパスを列挙する。Claude Code の指示ファイル(SKILL.md/CLAUDE.md/
+// レポート等)のパスを列挙する。AIエージェントの指示ファイル(SKILL.md/CLAUDE.md/
 // AGENTS.md、.claude/skills//agents//rules/ 配下、および本リポジトリのplugin
 // 開発レイアウトplugins/<name>/skills//agents/ 配下)は対象外 — 意図的に簡潔・
 // 箇条書き中心であり、この監査の前提(散文の書き手性・リズム)が成立しない。

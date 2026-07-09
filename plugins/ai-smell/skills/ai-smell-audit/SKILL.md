@@ -20,7 +20,7 @@ allowed-tools: Agent, Bash, Read, Write
 ## Purpose
 
 Project-wide audit of prose documents (articles, README, reports — NOT
-Claude Code instruction files) for 3 categories that fixed-phrase pattern
+AI-agent instruction files) for 3 categories that fixed-phrase pattern
 matching structurally cannot catch, because each needs document-level or
 open-vocabulary judgment rather than matching against a known phrase
 list:
@@ -43,9 +43,9 @@ list:
   the three — a genuine, specific sentence that happens to share a word
   with a stock phrase is not a paraphrase of it.
 
-This is Claude-led semantic judgment, not deterministic pattern matching —
-it can miss things or produce false positives and is not a save-time
-gate. Output is a written report only; no in-session edits.
+This is AI-agent-led semantic judgment, not deterministic pattern
+matching — it can miss things or produce false positives and is not a
+save-time gate. Output is a written report only; no in-session edits.
 
 ## When to invoke
 
@@ -62,7 +62,7 @@ Do NOT invoke when:
   every save — this skill is for periodic, thorough sweeps instead.
 - The user wants the prose fixed, not just found — this skill is
   audit-only; remediation is a separate user decision.
-- The target is a Claude Code instruction file (SKILL.md, CLAUDE.md,
+- The target is an AI-agent instruction file (SKILL.md, CLAUDE.md,
   AGENTS.md, anything under `.claude/skills/`, `.claude/agents/`,
   `.claude/rules/`, or this repo's own plugin-dev layout
   `plugins/<name>/skills/`/`plugins/<name>/agents/`) — those are
@@ -79,7 +79,7 @@ Run:
 node "${CLAUDE_PLUGIN_ROOT}/skills/ai-smell-audit/list-docs.mjs" [path-prefix ...]
 ```
 
-This lists every in-scope `*.md` file path, excluding Claude Code
+This lists every in-scope `*.md` file path, excluding AI-agent
 instruction files. Pass explicit path prefixes if the user scoped the
 audit.
 
@@ -147,7 +147,7 @@ filter (otherwise the single worst finding overall).
 
 - **Document-level, not line-level.** Axis A and B require reading the
   whole document — never judge from an isolated paragraph.
-- **Excludes Claude Code instruction files.** SKILL.md/CLAUDE.md/AGENTS.md,
+- **Excludes AI-agent instruction files.** SKILL.md/CLAUDE.md/AGENTS.md,
   anything under `.claude/skills/`, `.claude/agents/`, or `.claude/rules/`,
   and this repo's own `plugins/<name>/skills/`/`plugins/<name>/agents/`
   are terse-by-design; this audit's axes would produce false positives

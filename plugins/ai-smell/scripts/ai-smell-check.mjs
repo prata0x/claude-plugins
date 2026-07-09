@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-// 定型フレーズ辞書によるAI臭の機械チェック。研究調査(stop-ai-slop-jp、Qiita/Zenn/note.comの
-// 実践者チェックリスト)で繰り返し指摘された、日本語のAI生成文に典型的な定型句のみを対象にする
-// — 語彙レベルの対策は「一世代前」であり構造・リズム面のAI臭は捉えられないが、機械チェックで
-// 拾える範囲はここまで、という割り切り。「これにより」「ではないでしょうか」は通常の接続表現
-// としても使われ、他エントリより誤検知が起きやすい既知のトレードオフ。両hookとも非block
-// (PreToolUseはcontext注入のみ、PostToolUseのexit 2はcontextとして渡るだけ)なので、
-// 誤検知があっても書き込み自体は妨げない。この辞書は陳腐化が速いため定期的な見直しが要る。
+// 定型フレーズ辞書によるAI臭の機械チェック。日本語のAI生成文で繰り返し指摘される
+// 典型的な定型句のみを対象にする — 語彙レベルの対策は構造・リズム面のAI臭までは
+// 捉えられないが、機械チェックで拾える範囲はここまで、という割り切り。「これにより」
+// 「ではないでしょうか」は通常の接続表現としても使われ、他エントリより誤検知が起き
+// やすい既知のトレードオフ。両hookとも非block(PreToolUseはcontext注入のみ、
+// PostToolUseのexit 2はcontextとして渡るだけ)なので、誤検知があっても書き込み
+// 自体は妨げない。この辞書は陳腐化が速いため定期的な見直しが要る。
 //
-// 対象は *.md のうち、Claude Code の指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
+// 対象は *.md のうち、AIエージェントの指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
 // .claude/skills//agents//rules/ 配下、および本リポジトリのplugin開発レイアウト
 // plugins/<name>/skills//agents/ 配下)を除く — それらは意図的に簡潔・箇条書き
 // 中心であり、このチェックの前提(人間読者向けの散文)が成立しない。skills/agents/
@@ -139,7 +139,7 @@ function editedTargets(payload) {
   if (!filePath || !inScope(filePath)) return []
 
   // Edit/Writeで新しく書かれたテキスト断片を集める。tool_inputのフィールド名は
-  // ツールとClaude Codeのバージョンにより揺れうるため、候補キーを複数探索する。
+  // ツールとエージェント実装のバージョンにより揺れうるため、候補キーを複数探索する。
   const ti = payload?.tool_input ?? {}
   const newTexts = [ti.content, ti.file_text, ti.new_string, ti.new_text].filter((v) => typeof v === 'string')
   if (Array.isArray(ti.operations)) {
