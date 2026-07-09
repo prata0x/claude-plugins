@@ -7,10 +7,9 @@ description: >
   a DeNA engineering blog post that reads as clearly having a writer
   present specifically because it doesn't hide being AI-written. Trigger
   phrases — "ブログ記事を書いて", "この作業を記事にして", "この件をブログにまとめて",
-  "write a blog post about this", "turn this into an article". Lower
-  priority than `tech-doc-writer` — use this only when the user explicitly
-  wants a blog/article format with personality, not for README/design-doc/
-  report prose.
+  "write a blog post about this", "turn this into an article". Use this
+  only when the user explicitly wants a blog/article format with
+  personality, not for README/design-doc/report prose.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
@@ -46,14 +45,14 @@ being present — it does not need to fake being human to do that.
   detached play-by-play does not.
 - **Use concrete, quantified specifics** (exact counts, before/after
   numbers, the actual error message) rather than generic summaries —
-  same substance requirement as `tech-doc-writer`, just delivered with
-  personality on top rather than instead of it.
+  substance is still the requirement, just delivered with personality on
+  top rather than instead of it.
 - **Give the human collaborator a credited role** (byline, direction
   given) rather than erasing them — the article is "AI narrating work
   directed by a human," not "AI pretending to be the sole author."
-- Still avoid the fixed-phrase dictionary the `ai-smell-check.mjs` hook
-  flags — a first-person voice doesn't excuse formulaic closers like
-  「いかがでしたか」/「参考になれば幸いです」.
+- Still avoid known AI-tell fixed phrases — a first-person voice doesn't
+  excuse formulaic closers like「いかがでしたか」/「参考になれば幸いです」
+  or hedges like「〜と言えるでしょう」/「〜ではないでしょうか」.
 
 ## Anti-patterns
 
@@ -63,4 +62,4 @@ being present — it does not need to fake being human to do that.
 | A one-line "Note: this post was AI-assisted" disclaimer, then human-voiced prose | Sustain the AI's own voice through the whole piece |
 | Flat, emotion-free chronology of what happened | React to specific moments — frustration, surprise, a joke at your own expense |
 | Erasing the human's involvement entirely | Credit the human's direction; you're narrating collaborative work |
-| Using this skill for README/design-doc/report prose | Use `tech-doc-writer` — persona is wrong for that register |
+| Using this skill for README/design-doc/report prose | Persona is wrong for that register — keep this to blog/article-style writing |

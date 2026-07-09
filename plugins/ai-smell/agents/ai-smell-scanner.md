@@ -8,10 +8,9 @@ tools: Read
 ## Purpose
 
 Judge one whole document against ONE axis (A, B, or C — specified by the
-calling prompt). This is semantic/rhetorical judgment, not pattern
-matching — the mechanical `ai-smell-check.mjs` hook already covers the
-fixed-phrase dictionary; this agent exists for what that hook structurally
-cannot catch.
+calling prompt). This is semantic/rhetorical judgment, not matching
+against a fixed-phrase list — this agent exists for what phrase matching
+structurally cannot catch.
 
 ## Input
 
@@ -57,15 +56,13 @@ function as a dictionary-listed phrase (self-referential "in this
 article...", generic wrap-up, unearned emphasis) but is phrased
 differently enough to evade the fixed-phrase regex.
 
-- Do not flag any phrase the dictionary already catches — check against
-  the known list (と言えるでしょう, ではないでしょうか,
+- Do not flag any phrase already on this known list — check against it
+  before flagging (と言えるでしょう, ではないでしょうか,
   と言っても過言ではありません, これにより, 本稿では〜を解説します,
   この記事では〜を解説します, いかがでしたか, 参考になれば幸いです,
   今後の動向に注目, ぜひ試してみて/活用してください, もちろんです！,
-  非常に重要です, 極めて重要な意味を持ちます) before flagging;
-  re-flagging those here is duplicate noise. This list must stay in sync
-  with `PATTERNS` in `scripts/ai-smell-check.mjs` — if the dictionary
-  changes, update this list too.
+  非常に重要です, 極めて重要な意味を持ちます); re-flagging those here
+  is duplicate noise.
 - **IS a violation**: a same-function paraphrase, e.g. "この文章を通じて〜を
   お伝えできればと思います" (paraphrase of a formulaic opener) or "少しでも
   お役に立てば嬉しいです" (paraphrase of a formulaic closer).

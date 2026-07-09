@@ -2,28 +2,28 @@
 name: ai-smell-audit
 description: >
   Occasional, thorough project-wide audit for AI臭 (AI-generated-text smell)
-  in prose documents that ai-smell-check.mjs's fixed-phrase hook
+  in prose documents, covering what fixed-phrase pattern matching
   structurally cannot catch: absence of a writer's actual stance (axis A —
   highest priority, per research the root cause behind surface-level
   phrase tics), structural/rhythm monotony (axis B), and formulaic
-  paraphrases of dictionary-caught phrases (axis C). Uses parallel
+  paraphrases of known AI-tell phrases (axis C). Uses parallel
   ai-smell-scanner (opus) sub-agents per axis/document and an
   ai-smell-confidence-filter (haiku) confidence filter, writing a report
   to tmp/ai-smell-audit-<date>.md. Trigger phrases — "AI臭監査して",
   "書き手の不在チェックして", "AI臭がないか確認して", "文章のAIっぽさをチェックして",
   "/ai-smell-audit", "audit for AI writing smell", "check these docs for
-  AI slop". Do NOT use for per-edit checking (that's the ai-smell-check.mjs
-  hook) or for continuous in-session checks after each write.
+  AI slop". Do NOT use for per-edit checking or for continuous in-session
+  checks after each write.
 allowed-tools: Agent, Bash, Read, Write
 ---
 
 ## Purpose
 
 Project-wide audit of prose documents (articles, README, reports — NOT
-Claude Code instruction files) for 3 categories that
-`ai-smell-check.mjs`'s fixed-phrase hook structurally cannot catch,
-because each needs document-level or open-vocabulary judgment rather than
-fixed phrase matching:
+Claude Code instruction files) for 3 categories that fixed-phrase pattern
+matching structurally cannot catch, because each needs document-level or
+open-vocabulary judgment rather than matching against a known phrase
+list:
 
 - **Axis A — absence of a writer (書き手の不在)** (highest priority).
   Research on this consistently points to this as the actual root cause
@@ -44,8 +44,8 @@ fixed phrase matching:
   with a stock phrase is not a paraphrase of it.
 
 This is Claude-led semantic judgment, not deterministic pattern matching —
-unlike the hook, it can miss things or produce false positives and is not
-a save-time gate. Output is a written report only; no in-session edits.
+it can miss things or produce false positives and is not a save-time
+gate. Output is a written report only; no in-session edits.
 
 ## When to invoke
 
@@ -54,17 +54,14 @@ a save-time gate. Output is a written report only; no in-session edits.
 - "audit for AI writing smell", "check these docs for AI slop"
 
 Run this after drafting a batch of documents/articles, or periodically
-alongside other project audits — not after every single edit (that's what
-the hook is for).
+alongside other project audits — not after every single edit.
 
 Do NOT invoke when:
 
-- The user wants per-edit / per-write checking — that's what the
-  `ai-smell-check.mjs` hook already does, deterministically, on every
-  save.
+- The user wants per-edit / per-write checking, done deterministically on
+  every save — this skill is for periodic, thorough sweeps instead.
 - The user wants the prose fixed, not just found — this skill is
-  audit-only; remediation is a separate user decision (or use the
-  `tech-doc-writer` / `blog-writer` skills when drafting new prose).
+  audit-only; remediation is a separate user decision.
 - The target is a Claude Code instruction file (SKILL.md, CLAUDE.md,
   AGENTS.md, anything under `.claude/skills/`, `.claude/agents/`,
   `.claude/rules/`, or this repo's own plugin-dev layout
@@ -82,9 +79,9 @@ Run:
 node "${CLAUDE_PLUGIN_ROOT}/skills/ai-smell-audit/list-docs.mjs" [path-prefix ...]
 ```
 
-This lists every in-scope `*.md` file path (same exclusion rules as the
-hook: excludes Claude Code instruction files). Pass explicit path prefixes
-if the user scoped the audit.
+This lists every in-scope `*.md` file path, excluding Claude Code
+instruction files. Pass explicit path prefixes if the user scoped the
+audit.
 
 **Cap and chunking**: each document is judged as a whole, not chunked by
 line (axis A/B require document-level context). If the corpus exceeds ~15
@@ -169,8 +166,8 @@ filter (otherwise the single worst finding overall).
 
 ## Anti-patterns
 
-- ❌ Running this every save. It's periodic and thorough, not a hook —
-  that role is `ai-smell-check.mjs`.
+- ❌ Running this every save. It's periodic and thorough — not meant for
+  continuous per-edit checking.
 - ❌ Auditing SKILL.md/CLAUDE.md/agent instruction files against these
   axes. They follow a different, deliberately terse convention.
 - ❌ Judging axis A/B from a single paragraph instead of the whole
