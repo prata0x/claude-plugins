@@ -2,27 +2,27 @@
 name: blog-writer
 description: >
   Drafting guidance for general blog articles/posts (any voice — opinion
-  piece, tutorial, narrative) that avoids AI臭 by fixing substance rather
-  than tone: a real stance, concrete specifics, varied rhythm, no
-  formulaic phrasing. Trigger phrases — "ブログ記事を書いて", "記事にして",
-  "この件を記事にまとめて", "write a blog post about this", "turn this into
-  an article", "draft a blog post". Do NOT use for README/design-doc/
-  report prose — that register wants direct, terse writing, not blog
-  voice. Do NOT use when the user explicitly wants the AI itself
-  presented as a disclosed, first-person narrator — that's a different,
-  more specific technique than general blog writing.
+  piece, tutorial, narrative): a real stance, concrete specifics, varied
+  rhythm, no formulaic phrasing — with a built-in check against generic,
+  hedge-heavy AI-generated-prose patterns. Trigger phrases —
+  "ブログ記事を書いて", "記事にして", "この件を記事にまとめて",
+  "write a blog post about this", "turn this into an article",
+  "draft a blog post". Do NOT use for README/design-doc/report prose —
+  that register wants direct, terse writing, not blog voice. Do NOT use
+  when the user explicitly wants the AI itself presented as a disclosed,
+  first-person narrator — that's a different, more specific technique
+  than general blog writing.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 ## Purpose
 
-A blog post reads as AI-generated for the same underlying reason any
-other prose does: **absence of a writer** (書き手の不在) — every
-paragraph is a take that could belong to any similar post on any similar
-topic, because nothing in it commits to a specific, checkable claim or a
-real opinion. Blog register makes this easier to hide (an exclamation
-point or a rhetorical question can read as "voice" while saying nothing),
-which makes the underlying problem worse, not better.
+A good blog post commits to a specific, checkable claim or a real opinion
+— not a take that could belong to any similar post on any similar topic.
+That same gap, absence of a writer's actual stance, is also what makes a
+blog post read as AI-generated, and blog register makes it easier to hide
+(an exclamation point or a rhetorical question can read as "voice" while
+saying nothing), which makes the underlying problem worse, not better.
 
 Adding tone (jokes, exclamation points, casual phrasing) without fixing
 substance is cosmetic. The fix is the same as any other register:

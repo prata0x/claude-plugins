@@ -45,7 +45,7 @@ claude plugin install <plugin名>@prata0x-plugins
 | `triage` | security-audit/comment-audit/project-auditの高信頼度findingを検証・重複確認した上でGitHub issue化するスキル・エージェント(実行前に承認確認あり) | `claude plugin install triage@prata0x-plugins` |
 | `response-quality` | 最終応答が日本語で書かれているか、focusモードで隠れた中間出力への後方参照が残っていないかをモデル判定するStop hook(`type: "prompt"`) | `claude plugin install response-quality@prata0x-plugins` |
 | `notify-sound` | WSL/Windows環境向けに、ターン終了時・AskUserQuestion待機時にpowershell.exe経由で通知音を鳴らすhook | `claude plugin install notify-sound@prata0x-plugins` |
-| `ai-writing` | AI臭を低減する、*.md編集前のcontext注入hook、定型フレーズを検出するpost-edit機械的hook、辞書では拾えない意味的な問題(書き手の不在・構造的単調さ・定型表現の言い換え)を確認する不定期実行の監査スキル、および技術文書・汎用ブログ記事・AI一人称ブログ記事それぞれの執筆ガイドスキル | `claude plugin install ai-writing@prata0x-plugins` |
+| `writing` | 技術文書・ブログ記事(汎用/AI一人称)・開発成果物(commit/PR/issue)・changelog・議事録・翻訳それぞれの執筆ガイドスキル(いずれもAI生成っぽい定型表現を防ぐチェックを内蔵)。加えて*.md編集前のcontext注入hook、定型フレーズを検出するpost-edit機械的hook、辞書では拾えない意味的な問題(書き手の不在・構造的単調さ・定型表現の言い換え)を確認する不定期実行の監査スキル | `claude plugin install writing@prata0x-plugins` |
 
 ## CI
 

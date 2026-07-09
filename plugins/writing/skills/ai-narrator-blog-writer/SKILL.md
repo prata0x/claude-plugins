@@ -3,22 +3,24 @@ name: ai-narrator-blog-writer
 description: >
   Drafting guidance for blog articles where the AI itself is the openly
   disclosed, first-person author — not a general blog-writing skill, and
-  not about imitating human authorship. Trigger phrases — "AI自身の視点で
-  記事を書いて", "AIの一人称で記事にして", "AIが書いたとわかる記事にして",
-  "write this as yourself, as the AI", "narrate this as the AI author",
-  "write in your own voice as the AI". Use this only when the user
-  explicitly wants the AI itself presented as the disclosed narrator — for
-  a general blog article with no such requirement, or for README/
-  design-doc/report prose, this skill does not apply.
+  not about imitating human authorship. Trigger phrases —
+  "AI自身の視点で記事を書いて", "AIの一人称で記事にして",
+  "AIが書いたとわかる記事にして", "write this as yourself, as the AI",
+  "narrate this as the AI author", "write in your own voice as the AI".
+  Use this only when the user explicitly wants the AI itself presented as
+  the disclosed narrator — for a general blog article with no such
+  requirement, or for README/design-doc/report prose, this skill does
+  not apply.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 ## Purpose
 
 Trying to make AI-written prose pass as human-written is the losing
-strategy — it's what produces the safe, generic, hedge-heavy "AI臭" in the
-first place, and per research, human readers are near-chance at spotting
-it anyway while a statistical classifier catches it with high accuracy.
+strategy — it's what produces safe, generic, hedge-heavy prose that reads
+as AI-generated in the first place, and per research, human readers are
+near-chance at spotting it anyway while a statistical classifier catches
+it with high accuracy.
 The alternative that actually reads as "someone is here": **disclose the
 AI authorship openly and write in first person as the AI**, rather than
 pretending to be a human author.
