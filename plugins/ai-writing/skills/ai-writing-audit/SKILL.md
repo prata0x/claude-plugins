@@ -1,29 +1,29 @@
 ---
-name: ai-smell-audit
+name: ai-writing-audit
 description: >
   Occasional, thorough project-wide audit for AI臭 (AI-generated-text smell)
-  in prose documents that ai-smell-check.mjs's fixed-phrase hook
+  in prose documents, covering what fixed-phrase pattern matching
   structurally cannot catch: absence of a writer's actual stance (axis A —
   highest priority, per research the root cause behind surface-level
   phrase tics), structural/rhythm monotony (axis B), and formulaic
-  paraphrases of dictionary-caught phrases (axis C). Uses parallel
-  ai-smell-scanner (opus) sub-agents per axis/document and an
-  ai-smell-confidence-filter (haiku) confidence filter, writing a report
-  to tmp/ai-smell-audit-<date>.md. Trigger phrases — "AI臭監査して",
+  paraphrases of known AI-tell phrases (axis C). Uses parallel
+  ai-writing-scanner (opus) sub-agents per axis/document and an
+  ai-writing-confidence-filter (haiku) confidence filter, writing a report
+  to tmp/ai-writing-audit-<date>.md. Trigger phrases — "AI臭監査して",
   "書き手の不在チェックして", "AI臭がないか確認して", "文章のAIっぽさをチェックして",
-  "/ai-smell-audit", "audit for AI writing smell", "check these docs for
-  AI slop". Do NOT use for per-edit checking (that's the ai-smell-check.mjs
-  hook) or for continuous in-session checks after each write.
+  "/ai-writing-audit", "audit for AI writing smell", "check these docs for
+  AI slop". Do NOT use for per-edit checking or for continuous in-session
+  checks after each write.
 allowed-tools: Agent, Bash, Read, Write
 ---
 
 ## Purpose
 
 Project-wide audit of prose documents (articles, README, reports — NOT
-Claude Code instruction files) for 3 categories that
-`ai-smell-check.mjs`'s fixed-phrase hook structurally cannot catch,
-because each needs document-level or open-vocabulary judgment rather than
-fixed phrase matching:
+AI-agent instruction files) for 3 categories that fixed-phrase pattern
+matching structurally cannot catch, because each needs document-level or
+open-vocabulary judgment rather than matching against a known phrase
+list:
 
 - **Axis A — absence of a writer (書き手の不在)** (highest priority).
   Research on this consistently points to this as the actual root cause
@@ -43,30 +43,29 @@ fixed phrase matching:
   the three — a genuine, specific sentence that happens to share a word
   with a stock phrase is not a paraphrase of it.
 
-This is Claude-led semantic judgment, not deterministic pattern matching —
-unlike the hook, it can miss things or produce false positives and is not
-a save-time gate. Output is a written report only; no in-session edits.
+This is AI-agent-led semantic judgment, not deterministic pattern
+matching — it can miss things or produce false positives and is not a
+save-time gate. Output is a written report only; no in-session edits.
 
 ## When to invoke
 
 - 「AI臭監査して」「書き手の不在チェックして」「文章のAIっぽさを確認して」
-- `/ai-smell-audit` (optionally followed by paths: `/ai-smell-audit docs/ README.md`)
+- `/ai-writing-audit` (optionally followed by paths: `/ai-writing-audit docs/ README.md`)
 - "audit for AI writing smell", "check these docs for AI slop"
 
 Run this after drafting a batch of documents/articles, or periodically
-alongside other project audits — not after every single edit (that's what
-the hook is for).
+alongside other project audits — not after every single edit.
 
 Do NOT invoke when:
 
-- The user wants per-edit / per-write checking — that's what the
-  `ai-smell-check.mjs` hook already does, deterministically, on every
-  save.
+- The user wants per-edit / per-write checking, done deterministically on
+  every save — this skill is for periodic, thorough sweeps instead.
 - The user wants the prose fixed, not just found — this skill is
-  audit-only; remediation is a separate user decision (or use the
-  `tech-doc-writer` / `blog-writer` skills when drafting new prose).
-- The target is a Claude Code instruction file (SKILL.md, CLAUDE.md,
-  AGENTS.md, anything under `skills/` or `agents/`) — those are
+  audit-only; remediation is a separate user decision.
+- The target is an AI-agent instruction file (SKILL.md, CLAUDE.md,
+  AGENTS.md, anything under `.claude/skills/`, `.claude/agents/`,
+  `.claude/rules/`, or this repo's own plugin-dev layout
+  `plugins/<name>/skills/`/`plugins/<name>/agents/`) — those are
   deliberately terse and bulleted by convention; this audit's axes don't
   apply.
 
@@ -77,23 +76,23 @@ Do NOT invoke when:
 Run:
 
 ```sh
-node "${CLAUDE_PLUGIN_ROOT}/skills/ai-smell-audit/list-docs.mjs" [path-prefix ...]
+node "${CLAUDE_PLUGIN_ROOT}/skills/ai-writing-audit/list-docs.mjs" [path-prefix ...]
 ```
 
-This lists every in-scope `*.md` file path (same exclusion rules as the
-hook: excludes Claude Code instruction files). Pass explicit path prefixes
-if the user scoped the audit.
+This lists every in-scope `*.md` file path, excluding AI-agent
+instruction files. Pass explicit path prefixes if the user scoped the
+audit.
 
-**Cap and chunking**: unlike `comment-audit`'s line-based chunking, each
-document is judged as a whole (axis A/B require document-level context).
-If the corpus exceeds ~15 documents, batch them into audit rounds of ~15
-rather than fanning out unbounded parallel agents in one response; record
-the round count in the report's scope section.
+**Cap and chunking**: each document is judged as a whole, not chunked by
+line (axis A/B require document-level context). If the corpus exceeds ~15
+documents, batch them into audit rounds of ~15 rather than fanning out
+unbounded parallel agents in one response; record the round count in the
+report's scope section.
 
 ### 2. Parallel fan-out — 3 axes × N documents
 
 For each document, launch 3 parallel Agent calls in a **single response**:
-`subagent_type: ai-smell-scanner`, one per axis (A, B, C), passing the
+`subagent_type: ai-writing-scanner`, one per axis (A, B, C), passing the
 axis letter and the file path. The agent reads the full document itself
 via Read — axis definitions, tool restrictions, and the dictionary
 exclusion list live in the agent itself.
@@ -111,9 +110,9 @@ same defect class.
 
 ### 4. Confidence scoring
 
-Same batching discipline as `comment-audit`: ≤ 50 structured findings →
-one `ai-smell-confidence-filter` call; > 50 → parallel chunks of 50 in
-input order, concatenate in chunk order.
+Batch findings for confidence scoring: ≤ 50 structured findings → one
+`ai-writing-confidence-filter` call; > 50 → parallel chunks of 50 in input
+order, concatenate in chunk order.
 
 **Length check (mandatory)**: after concatenating, if
 `len(scores) != len(findings)`, halt and report a confidence-filter
@@ -132,7 +131,7 @@ and not filtered.
 
 ### 6. Write report file
 
-Path: `tmp/ai-smell-audit-<YYYY-MM-DD>.md` (workspace `tmp/`, not OS
+Path: `tmp/ai-writing-audit-<YYYY-MM-DD>.md` (workspace `tmp/`, not OS
 `/tmp`; confirm it is gitignored before writing). `mkdir -p tmp/` if
 missing. Overwrite any existing file at the same path.
 
@@ -148,9 +147,11 @@ filter (otherwise the single worst finding overall).
 
 - **Document-level, not line-level.** Axis A and B require reading the
   whole document — never judge from an isolated paragraph.
-- **Excludes Claude Code instruction files.** SKILL.md/CLAUDE.md/AGENTS.md
-  and anything under `skills/`/`agents/` are terse-by-design; this audit's
-  axes would produce false positives there.
+- **Excludes AI-agent instruction files.** SKILL.md/CLAUDE.md/AGENTS.md,
+  anything under `.claude/skills/`, `.claude/agents/`, or `.claude/rules/`,
+  and this repo's own `plugins/<name>/skills/`/`plugins/<name>/agents/`
+  are terse-by-design; this audit's axes would produce false positives
+  there.
 - **Axis A is reported first**, but is scored by the same 80-point
   threshold as B/C — importance changes ordering, not the bar for
   inclusion.
@@ -165,8 +166,8 @@ filter (otherwise the single worst finding overall).
 
 ## Anti-patterns
 
-- ❌ Running this every save. It's periodic and thorough, not a hook —
-  that role is `ai-smell-check.mjs`.
+- ❌ Running this every save. It's periodic and thorough — not meant for
+  continuous per-edit checking.
 - ❌ Auditing SKILL.md/CLAUDE.md/agent instruction files against these
   axes. They follow a different, deliberately terse convention.
 - ❌ Judging axis A/B from a single paragraph instead of the whole

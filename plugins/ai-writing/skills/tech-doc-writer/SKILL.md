@@ -10,8 +10,8 @@ description: >
   authoring SKILL.md/CLAUDE.md/agent instruction files — those follow this
   repo's own terse, bulleted decision-logic convention, which is the
   opposite of what this skill optimizes for. Do NOT use when the user
-  wants a blog-style article with a first-person voice — that's
-  `blog-writer`.
+  wants a blog-style article with a first-person, personality-driven
+  voice.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
@@ -55,14 +55,13 @@ weighed) or cut it.
 - **Cut formulaic openers/closers.** No "This document explains...", no
   "In conclusion...", no "I hope this is helpful." Start with the
   content; stop when the content is done.
-- **Avoid the fixed-phrase dictionary** the `ai-smell-check.mjs` hook
-  flags (と言えるでしょう, ではないでしょうか, と言っても過言ではありません,
-  これにより, 本稿では〜を解説します, この記事では〜を解説します,
-  いかがでしたか, 参考になれば幸いです, 今後の動向に注目,
-  ぜひ試してみて/活用してください, もちろんです！, 非常に重要です,
-  極めて重要な意味を持ちます) — but do not treat "the hook didn't flag
-  it" as proof the prose is fine; the hook only catches the shallowest
-  layer.
+- **Avoid known AI-tell fixed phrases** (と言えるでしょう, ではないでしょうか,
+  と言っても過言ではありません, これにより, 本稿では〜を解説します,
+  この記事では〜を解説します, いかがでしたか, 参考になれば幸いです,
+  今後の動向に注目, ぜひ試してみて/活用してください, もちろんです！,
+  非常に重要です, 極めて重要な意味を持ちます) — but avoiding this list
+  is not sufficient on its own; it only catches the shallowest layer. The
+  writer test above is the real bar.
 
 ## Anti-patterns
 
@@ -71,5 +70,5 @@ weighed) or cut it.
 | "This may improve performance in certain scenarios" | "This cuts p99 by ~40% under the write-heavy benchmark" |
 | Every section shaped as intro sentence + 3 bullets + summary line | Vary structure by what the section actually needs to say |
 | A confident-sounding claim with no way to check it | A claim tied to a file, metric, or reproducible observation |
-| Adding jokes/persona to sound less AI-generated | Fix substance instead — see `blog-writer` if voice is actually wanted |
-| Treating a clean `ai-smell-check.mjs` run as "done" | The hook only catches known phrases; the writer test above is the real bar |
+| Adding jokes/persona to sound less AI-generated | Fix substance instead — persona isn't the fix for technical prose |
+| Treating "no known AI-tell phrases present" as "done" | That list only catches the shallowest layer; the writer test above is the real bar |

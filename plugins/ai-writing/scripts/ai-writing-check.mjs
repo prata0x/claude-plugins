@@ -1,15 +1,18 @@
 #!/usr/bin/env node
-// 定型フレーズ辞書によるAI臭の機械チェック。研究調査(stop-ai-slop-jp、Qiita/Zenn/note.comの
-// 実践者チェックリスト)で繰り返し指摘された、日本語のAI生成文に典型的な定型句のみを対象にする
-// — 語彙レベルの対策は「一世代前」であり構造・リズム面のAI臭は捉えられないが、機械チェックで
-// 拾える範囲はここまで、という割り切り。「これにより」「ではないでしょうか」は通常の接続表現
-// としても使われ、他エントリより誤検知が起きやすい既知のトレードオフ。両hookとも非block
-// (PreToolUseはcontext注入のみ、PostToolUseのexit 2はcontextとして渡るだけ)なので、
-// 誤検知があっても書き込み自体は妨げない。この辞書は陳腐化が速いため定期的な見直しが要る。
+// 定型フレーズ辞書によるAI臭の機械チェック。日本語のAI生成文で繰り返し指摘される
+// 典型的な定型句のみを対象にする — 語彙レベルの対策は構造・リズム面のAI臭までは
+// 捉えられないが、機械チェックで拾える範囲はここまで、という割り切り。「これにより」
+// 「ではないでしょうか」は通常の接続表現としても使われ、他エントリより誤検知が起き
+// やすい既知のトレードオフ。両hookとも非block(PreToolUseはcontext注入のみ、
+// PostToolUseのexit 2はcontextとして渡るだけ)なので、誤検知があっても書き込み
+// 自体は妨げない。この辞書は陳腐化が速いため定期的な見直しが要る。
 //
-// 対象は *.md のうち、Claude Code の指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
-// skills//agents/ 配下)を除く — それらは意図的に簡潔・箇条書き中心であり、この
-// チェックの前提(人間読者向けの散文)が成立しない。
+// 対象は *.md のうち、AIエージェントの指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
+// .claude/skills//agents//rules/ 配下、および本リポジトリのplugin開発レイアウト
+// plugins/<name>/skills//agents/ 配下)を除く — それらは意図的に簡潔・箇条書き
+// 中心であり、このチェックの前提(人間読者向けの散文)が成立しない。skills/agents/
+// rulesという名前のディレクトリ自体はこの用途と無関係に存在しうるため、
+// .claude/配下かplugins/<name>/配下のいずれかに限定してマッチさせる。
 //
 // 判定は物理行単位(ai-comment-check.mjsからの流用)。日本語散文は通常1段落=1論理行
 // でsoft-wrapされるため実害は薄いが、ハードラップされたMarkdownで定型句が行境界を
@@ -34,7 +37,7 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync, statSync } from 'node:fs'
 
 const EXCLUDE_RE = /(^|\/)(node_modules|vendor|dist|build|out|\.next|target|__pycache__|\.venv|venv|coverage)\//
-const INSTRUCTION_DOC_RE = /(^|\/)(skills|agents)[a-z-]*\/|(^|\/)(SKILL|CLAUDE|AGENTS)\.md$/i
+const INSTRUCTION_DOC_RE = /(^|\/)\.claude\/(skills|agents|rules)\/|(^|\/)plugins\/[^/]+\/(skills|agents)\/|(^|\/)(SKILL|CLAUDE|AGENTS)\.md$/i
 const MD_RE = /\.md$/i
 const STAGED_MODE = process.argv.includes('--staged')
 const EDIT_MODE = process.argv.includes('--edit')
@@ -136,7 +139,7 @@ function editedTargets(payload) {
   if (!filePath || !inScope(filePath)) return []
 
   // Edit/Writeで新しく書かれたテキスト断片を集める。tool_inputのフィールド名は
-  // ツールとClaude Codeのバージョンにより揺れうるため、候補キーを複数探索する。
+  // ツールとエージェント実装のバージョンにより揺れうるため、候補キーを複数探索する。
   const ti = payload?.tool_input ?? {}
   const newTexts = [ti.content, ti.file_text, ti.new_string, ti.new_text].filter((v) => typeof v === 'string')
   if (Array.isArray(ti.operations)) {

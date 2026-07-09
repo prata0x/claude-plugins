@@ -1,6 +1,6 @@
 ---
-name: ai-smell-confidence-filter
-description: Batched 0-100 confidence scorer for ai-smell-audit findings (absence-of-writer stance, structural/rhythm monotony, formulaic paraphrase). Pure judgment over the text passed in the prompt — no tool access. Invoked by the ai-smell-audit skill, not typically triggered directly by user phrasing.
+name: ai-writing-confidence-filter
+description: Batched 0-100 confidence scorer for ai-writing-audit findings (absence-of-writer stance, structural/rhythm monotony, formulaic paraphrase). Pure judgment over the text passed in the prompt — no tool access. Invoked by the ai-writing-audit skill, not typically triggered directly by user phrasing.
 model: haiku
 tools: []
 ---
