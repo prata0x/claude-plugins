@@ -1,0 +1,8 @@
+{
+  "name": "ai-smell",
+  "description": "Reduces AI臭 (the telltale smell of AI-generated Japanese prose) in documents and articles: a PreToolUse hook that nudges before writing *.md, a mechanical fixed-phrase hook that flags known AI-tell phrases after writing, an occasional project-wide audit skill for the semantic issues the dictionary can't catch (absence of a writer's stance, structural monotony, formulaic paraphrases), and writer skills for technical docs and blog-style articles.",
+  "version": "0.1.0",
+  "author": {
+    "name": "prata0x"
+  }
+}

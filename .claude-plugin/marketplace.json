@@ -59,6 +59,11 @@
       "name": "notify-sound",
       "source": "./plugins/notify-sound",
       "description": "Plays a Windows notification sound from WSL on turn end and on AskUserQuestion."
+    },
+    {
+      "name": "ai-smell",
+      "source": "./plugins/ai-smell",
+      "description": "Reduces AI臭 in Japanese prose documents/articles: a pre-write context nudge, a fixed-phrase mechanical hook, an occasional project-wide audit skill for absence-of-writer/rhythm issues, and writer skills for technical docs and blog-style articles."
     }
   ]
 }
