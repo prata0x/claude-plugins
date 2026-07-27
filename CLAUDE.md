@@ -7,9 +7,6 @@ Claude Code plugin marketplace (`.claude-plugin/marketplace.json`).
 Also holds AI-agent security notes (`docs/`) referenced by the code-review
 agents.
 
-@.claude/vendor/universal.md
-@.claude/vendor/product-repo.md
-
 ## Prompt design philosophy for AI agents
 
 These are the rules that govern how skills (and any prompt-shaped artifact in this repo) are written. They reflect what the user has learned about steering AI agents and apply across every skill in this project.
@@ -62,3 +59,12 @@ the body is read by Claude, not the user.
 - **Copilot is read-only review.** Never ask Copilot to modify, fix, push, or install. The `copilot` skill enforces this; do not work around it.
 - **Skills are decision logic, not tutorials.** ~100 lines, anti-pattern + alternative tables, workflow at a glance. If a section is restating what the agent already knows, cut it.
 - **Reference, do not inline.** Point at `path:line` and commit SHAs; do not paste diffs or full file contents into skills or handoffs.
+
+## Repo conventions
+
+- Use Conventional Commits.
+- Track the backlog in GitHub Issues via the `gh` CLI, not ad-hoc notes,
+  TODO comments, or handoff documents.
+- Once a blanket rule is confirmed ("for all X, do Y"), keep applying it
+  mechanically even as scope expands; raise a candidate exception as a
+  separate question instead of narrowing the rule unilaterally.
