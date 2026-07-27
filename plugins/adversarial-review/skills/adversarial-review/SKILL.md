@@ -30,22 +30,29 @@ Do NOT invoke when:
 
 ## Workflow
 
-1. **Resolve scope**: take the diff range as given (e.g. `git diff <range>`). Never expand or narrow it on your own judgment — if the range looks unusually large, review it anyway and flag the size in the report rather than truncating silently.
+1. **Resolve scope**: take the diff range as given (e.g. `<ref>..HEAD`). Never expand or narrow it on your own judgment.
 2. **Gather intent**: `git log <range> --oneline` (or the caller's own one-line description if no range resolves to commits) to summarize what the diff is meant to do.
-3. **Dispatch, in a single response**: 3 parallel `Agent` calls, `subagent_type: diff-review-scanner`, one per axis (A: correctness & regressions, B: design & maintainability, C: test coverage), each passed the full diff and the intent summary.
-4. **Integrate**: merge the 3 axis results into one findings list. Same-`file` + `line ±3` flagged by 2+ axes → mark `cross_axis: true` (independent agreement across distinct lenses is stronger evidence). Intra-axis dedupe by `file + line + finding`.
-5. **Confidence scoring**: pass the merged findings (without `cross_axis`, to keep the filter unbiased) to `diff-review-confidence-filter` — one call if ≤ 50 findings, parallel chunks of 50 in input order if more, then concatenate scores in chunk order. **Length check (mandatory)**: if the returned score count doesn't match the finding count, halt and report a confidence-filter failure rather than proceeding with misaligned scores.
-6. **Apply cross-axis bonus**: for each `cross_axis: true` finding, add 10 to its score (cap 100) — applied by you after the filter returns, not by the filter itself.
-7. **Filter**: drop findings scoring < 80. `sub-agent-raw:<axis>` entries (non-JSON scanner output) are not scored and not filtered — carry them forward verbatim.
-8. **Report**: reply with the surviving findings ordered by severity, each labeled by axis, plus any raw/unparseable axis output. If nothing survives, state that plainly rather than padding with weak findings.
+3. **Dispatch, in a single response**: 3 parallel `Agent` calls, `subagent_type: diff-review-scanner`, one per axis (A: correctness & regressions, B: design & maintainability, C: test coverage), each passed the range (not the diff text — the scanner fetches it itself) and the intent summary.
+4. **Partition results BEFORE parsing**, into three buckets:
+   - **Parsed** — axis returned a valid JSON array matching the schema.
+   - **Raw** — axis returned content that is not valid JSON. Label `sub-agent-raw:<axis>`; carry the prose forward verbatim (bypasses steps 5–7).
+   - **Failed** — axis timed out, refused, or returned no content. Label `sub-agent-failed:<axis>` (bypasses steps 5–7; recorded for step 8's status).
+5. **Integrate the Parsed bucket only**: intra-axis dedupe by `file + line + finding`. Axes A/B/C are disjoint by design (scanners are told not to cross-flag), so do not implement a cross-axis agreement bonus here — that mechanism only makes sense when axes can genuinely overlap on the same line, which these three do not. **The findings list from this step is FINAL** — no reorder, dedupe, addition, or modification between this point and step 6.
+6. **Confidence scoring**: pass the findings list from Step 5 to `diff-review-confidence-filter` — one call if ≤ 50 findings, parallel chunks of 50 in input order if more, then concatenate scores in chunk order. **Length check (mandatory)**: if the returned score count doesn't match the finding count, halt and report a confidence-filter failure rather than proceeding with misaligned scores.
+7. **Filter**: drop findings scoring < 75 (the rubric's own "high confidence, real impact" anchor — see the agent's rubric). Raw and Failed entries are not scored and not filtered.
+8. **Report status**, then reply:
+   - ≥ 1 finding after filter OR ≥ 1 raw entry → **findings**: report normally, ordered by severity, each labeled by axis, plus any raw axis output.
+   - 0 findings, 0 raw, 0 failed → **clean**: state this plainly.
+   - 0 findings, 0 raw, ≥ 1 failed → **incomplete**: state that the review could not complete — name which axes failed — and do NOT report this as clean. Re-run before treating the range as reviewed.
 
 ## Critical rules
 
 - **The caller supplies scope.** This skill never invents a diff range — ask rather than guess if none was given.
 - **Parallel, not sequential** in Step 3 — one response, 3 `Agent` uses.
-- **The confidence filter does not see `cross_axis`.** Apply the bonus yourself after it returns.
+- **No cross-axis bonus.** Unlike `security-audit`'s 8 overlapping axes, these 3 lenses are disjoint by construction; a same-line hit across axes would be a scanner failing to stay in its lane, not corroborating evidence.
+- **A failed axis is never silently treated as clean.** Distinguish `incomplete` from `clean` — see Step 8.
 - **Audit only — no remediation.** Report findings; the calling session decides what to fix and when.
-- **No retries on scanner failure.** If an axis times out or returns garbage, mark it raw/failed and proceed with the rest.
+- **No retries on scanner failure.** Mark it raw/failed and proceed with the rest.
 
 ## Anti-patterns
 
@@ -53,7 +60,9 @@ Do NOT invoke when:
 |---|---|
 | Inferring "since last deploy" or "since branch base" on your own | Take the range the caller gives; ask if none was supplied. |
 | Running the 3 scanner axes sequentially | One response, 3 parallel `Agent` calls. |
-| Letting the confidence filter see `cross_axis` | Apply the +10 bonus yourself, after scoring. |
-| Truncating a large diff silently | Review it anyway; flag the size in the report. |
+| Reporting a run as clean when an axis failed | Distinguish `incomplete` (a failure occurred) from `clean` (nothing found). |
+| Adding a cross-axis bonus like `security-audit` | These 3 axes are disjoint by design — don't reuse a mechanism built for overlapping axes. |
+| Reordering or modifying findings between Steps 5 and 6 | The list is final once integrated; only scores get attached. |
+| Truncating a large diff silently | The scanner fetches and chunks its own reading; this skill never truncates on its behalf. |
 | Treating this as a substitute for `security-audit` | This is diff-scoped correctness/design/test review, not a security sweep. |
 | Auto-fixing a finding | Report only. The calling session decides. |

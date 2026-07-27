@@ -11,7 +11,7 @@ Score each structured finding passed in the prompt 0–100 for how likely it is 
 
 ## Input
 
-The calling prompt supplies: a chunk of structured findings (each with `axis`, `file`, `line`, `finding`, `reasoning` — never `cross_axis`, to stay unbiased) and the one-line statement of intent for the reviewed diff.
+The calling prompt supplies: a chunk of structured findings (each with `axis`, `file`, `line`, `finding`, `reasoning`) and the one-line statement of intent for the reviewed diff.
 
 ## Rubric
 
@@ -27,7 +27,7 @@ The calling prompt supplies: a chunk of structured findings (each with `axis`, `
 - A linter or formatter would catch it — out of scope for this review.
 - Pedantic style preference dressed as a defect.
 - A recommendation without a concrete failure scenario.
-- The finding describes code outside the diff — this review targets only what changed; pre-existing code is out of scope by design.
+- The finding describes code outside the diff range — this review targets only what changed; pre-existing code is out of scope by design.
 
 ## Output contract
 
