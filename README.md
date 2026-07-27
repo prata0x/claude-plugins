@@ -15,10 +15,6 @@ Claude Code plugin marketplace。個人用のClaude Codeスキル・エージェ
 - `scripts/` — ビルドスクリプト(`build-agents.mjs`・`build-plugins.mjs`)と、
   それらが各pluginにコピーするleafスクリプト(`check-secrets.mjs`・
   `security-pattern-check.mjs`)
-- `.claude/vendor/` — 姉妹リポジトリ
-  [`claude-md-conventions`](https://github.com/prata0x/claude-md-conventions)
-  からvendorした`universal.md` / `product-repo.md`(取得コマンドは向こうの
-  `README.md`を参照)
 - `.claude/skills/` — このリポジトリ自身の運用用スキル(配布pluginには含めない)。
   `release` — plugin毎のversionが実体に追いついているか確認し、必要なら
   bumpしてPR→CI green→自動マージするリリーススキル
