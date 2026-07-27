@@ -33,8 +33,8 @@ jobs:
       - name: Rebuild generated agents and check for drift
         run: |
           node ./scripts/build-agents.mjs
-          if ! git diff --exit-code -- plugins/code-review/agents/; then
-            echo "::error::plugins/code-review/agents/ is out of date relative to agents-src/*.md." >&2
+          if ! git diff --exit-code -- plugins/second-opinion/agents/; then
+            echo "::error::plugins/second-opinion/agents/ is out of date relative to agents-src/*.md." >&2
             echo "::error::Run scripts/build-agents.mjs and commit the result." >&2
             exit 1
           fi

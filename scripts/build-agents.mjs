@@ -19,24 +19,6 @@ function writeAgent(outDir, name, model, description, tools, bodyFile) {
 }
 
 writeAgent(
-  'plugins/code-review/agents',
-  'code-reviewer-sonnet',
-  'sonnet',
-  'Fast, low-latency diff reviewer for frequent use (e.g. before each commit). Invoked by review skills, not typically triggered directly by user phrasing.',
-  'Read, Grep, Glob',
-  'code-reviewer-body.md',
-)
-
-writeAgent(
-  'plugins/code-review/agents',
-  'code-reviewer-opus',
-  'opus',
-  'Thorough diff reviewer for high-stakes, low-frequency checks (e.g. before merge, when no human reviews the PR afterward). Invoked by review skills, not typically triggered directly by user phrasing.',
-  'Read, Grep, Glob',
-  'code-reviewer-body.md',
-)
-
-writeAgent(
   'plugins/second-opinion/agents',
   'fable-advisor',
   'fable',

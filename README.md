@@ -8,13 +8,11 @@ Claude Code plugin marketplace。個人用のClaude Codeスキル・エージェ
 - `.claude-plugin/marketplace.json` — marketplaceカタログ
 - `plugins/` — plugin単位のディレクトリ。各々が独自の`skills/`・`agents/`・
   (あれば)`hooks/`を持つ
-- `agents-src/` — `scripts/build-agents.mjs`が生成するcode-review・
-  second-opinionエージェントのソース
-- `docs/` — code-reviewエージェントが参照するAIエージェント向けセキュリティ
-  参考資料
+- `agents-src/` — `scripts/build-agents.mjs`が生成するsecond-opinion
+  エージェントのソース
+- `docs/` — AIエージェント向けセキュリティ参考資料
 - `scripts/` — ビルドスクリプト(`build-agents.mjs`・`build-plugins.mjs`)と、
-  それらが各pluginにコピーするleafスクリプト(`check-secrets.mjs`・
-  `security-pattern-check.mjs`)
+  それらが各pluginにコピーするleafスクリプト(`check-secrets.mjs`)
 - `.claude/skills/` — このリポジトリ自身の運用用スキル(配布pluginには含めない)。
   `release` — plugin毎のversionが実体に追いついているか確認し、必要なら
   bumpしてPR→CI green→自動マージするリリーススキル
@@ -31,13 +29,9 @@ claude plugin install <plugin名>@prata0x-plugins
 | Plugin | 説明 | インストール |
 |---|---|---|
 | `tdd` | test-first (red-green-refactor) の実装フロースキル | `claude plugin install tdd@prata0x-plugins` |
-| `code-review` | pre-commit / pre-mergeのコードレビュースキル・エージェント | `claude plugin install code-review@prata0x-plugins` |
-| `security` | プロジェクト全体のセキュリティ監査スキル・エージェント、およびcommit時の機械的セキュリティパターンhook | `claude plugin install security@prata0x-plugins` |
 | `second-opinion` | read-onlyのレビュー・調査タスクをGitHub Copilot CLI / OpenAI Codex CLIに委任、copilot→codex→opusの自律fallbackチェーンでセカンドオピニオンを取得、または`/fable`・`/opus`で特定タスクをFable/Opusに単発で相談 | `claude plugin install second-opinion@prata0x-plugins` |
 | `align` | 実装前のすり合わせ・spec sketchスキル | `claude plugin install align@prata0x-plugins` |
-| `comment` | staged追加分のstale-riskなコメントパターンをブロックするpre-commit hook、およびhookのregexでは拾えない漏洩・ナレーション系問題を確認する不定期実行のcomment-audit監査スキル | `claude plugin install comment@prata0x-plugins` |
-| `project` | プロジェクト全体の課題発見監査スキル・エージェント(AIエージェントの作業障害＋利用者視点の product gap) | `claude plugin install project@prata0x-plugins` |
-| `triage` | security-audit/comment-audit/project-auditの高信頼度findingを検証・重複確認した上でGitHub issue化するスキル・エージェント(実行前に承認確認あり) | `claude plugin install triage@prata0x-plugins` |
+| `audit` | プロジェクト全体を対象にした不定期実行の監査スキル群(comment-audit・project-audit・security-audit)と、それらの高信頼度findingを検証・重複確認した上でGitHub issue化するissue-triageスキル。hookは持たず、commit時の機械的ゲートは行わない | `claude plugin install audit@prata0x-plugins` |
 | `response-quality` | 最終応答が日本語で書かれているか、focusモードで隠れた中間出力への後方参照が残っていないかをモデル判定するStop hook(`type: "prompt"`) | `claude plugin install response-quality@prata0x-plugins` |
 | `notify-sound` | WSL/Windows環境向けに、ターン終了時・AskUserQuestion待機時にpowershell.exe経由で通知音を鳴らすhook | `claude plugin install notify-sound@prata0x-plugins` |
 | `writing` | 技術文書・ブログ記事(汎用/AI一人称)・開発成果物(commit/PR/issue)・changelog・議事録・翻訳それぞれの執筆ガイドスキル(いずれもAI生成っぽい定型表現を防ぐチェックを内蔵)。加えて*.md編集前のcontext注入hook、定型フレーズを検出するpost-edit機械的hook、辞書では拾えない意味的な問題(書き手の不在・構造的単調さ・定型表現の言い換え)を確認する不定期実行の監査スキル | `claude plugin install writing@prata0x-plugins` |
