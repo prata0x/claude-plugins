@@ -96,7 +96,7 @@ do not create a branch or PR for a no-op.
 Run the same checks CI runs, before pushing:
 
 ```bash
-node scripts/build-agents.mjs && git diff --exit-code -- plugins/code-review/agents/ plugins/second-opinion/agents/
+node scripts/build-agents.mjs && git diff --exit-code -- plugins/second-opinion/agents/
 node scripts/build-plugins.mjs && git diff --exit-code -- plugins/
 node scripts/security-pattern-check.mjs
 claude plugin validate . --strict
