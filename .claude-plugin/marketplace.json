@@ -16,11 +16,6 @@
       "description": "Pre-commit and pre-merge code review skills and agents."
     },
     {
-      "name": "handoff",
-      "source": "./plugins/handoff",
-      "description": "Session handoff and resume skills."
-    },
-    {
       "name": "security",
       "source": "./plugins/security",
       "description": "Project-wide security audit skill and agents, plus a commit-time mechanical security pattern hook."

@@ -36,7 +36,6 @@ claude plugin install <plugin名>@prata0x-plugins
 |---|---|---|
 | `tdd` | test-first (red-green-refactor) の実装フロースキル | `claude plugin install tdd@prata0x-plugins` |
 | `code-review` | pre-commit / pre-mergeのコードレビュースキル・エージェント | `claude plugin install code-review@prata0x-plugins` |
-| `handoff` | セッションの引き継ぎ・再開スキル | `claude plugin install handoff@prata0x-plugins` |
 | `security` | プロジェクト全体のセキュリティ監査スキル・エージェント、およびcommit時の機械的セキュリティパターンhook | `claude plugin install security@prata0x-plugins` |
 | `second-opinion` | read-onlyのレビュー・調査タスクをGitHub Copilot CLI / OpenAI Codex CLIに委任、copilot→codex→opusの自律fallbackチェーンでセカンドオピニオンを取得、または`/fable`・`/opus`で特定タスクをFable/Opusに単発で相談 | `claude plugin install second-opinion@prata0x-plugins` |
 | `align` | 実装前のすり合わせ・spec sketchスキル | `claude plugin install align@prata0x-plugins` |
