@@ -33,7 +33,7 @@
     {
       "name": "response-quality",
       "source": "./plugins/response-quality",
-      "description": "Stop hooks (type: prompt) that judge whether the final response is written in Japanese and doesn't dangle a reference to content the user never saw, and force a redo when it doesn't hold."
+      "description": "Stop hook (type: prompt) that judges whether the final response is written in Japanese, and forces a redo when it isn't."
     },
     {
       "name": "notify-sound",
