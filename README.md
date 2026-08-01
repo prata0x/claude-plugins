@@ -33,7 +33,7 @@ claude plugin install <plugin名>@prata0x-plugins
 | `align` | 実装前のすり合わせ・spec sketchスキル | `claude plugin install align@prata0x-plugins` |
 | `audit` | プロジェクト全体を対象にした不定期実行の監査スキル群(comment-audit・project-audit・security-audit)と、それらの高信頼度findingを検証・重複確認した上でGitHub issue化するissue-triageスキル。hookは持たず、commit時の機械的ゲートは行わない | `claude plugin install audit@prata0x-plugins` |
 | `adversarial-review` | 呼び出し時に指定したdiff範囲を対象に、correctness/regressions・design/maintainability・test coverageの3軸scannerを並列実行し、confidence-filterでスコアリングする深掘りレビュースキル。deploy前など、通常の`reviewer`より高い精度が必要な場面向け | `claude plugin install adversarial-review@prata0x-plugins` |
-| `response-quality` | 最終応答が日本語で書かれているか、focusモードで隠れた中間出力への後方参照が残っていないかをモデル判定するStop hook(`type: "prompt"`) | `claude plugin install response-quality@prata0x-plugins` |
+| `response-quality` | 最終応答が日本語で書かれているかをモデル判定するStop hook(`type: "prompt"`) | `claude plugin install response-quality@prata0x-plugins` |
 | `notify-sound` | WSL/Windows環境向けに、ターン終了時・AskUserQuestion待機時にpowershell.exe経由で通知音を鳴らすhook | `claude plugin install notify-sound@prata0x-plugins` |
 | `writing` | 技術文書・ブログ記事(汎用/AI一人称)・開発成果物(commit/PR/issue)・changelog・議事録・翻訳それぞれの執筆ガイドスキル(いずれもAI生成っぽい定型表現を防ぐチェックを内蔵)。加えて*.md編集前のcontext注入hook、定型フレーズを検出するpost-edit機械的hook、辞書では拾えない意味的な問題(書き手の不在・構造的単調さ・定型表現の言い換え)を確認する不定期実行の監査スキル | `claude plugin install writing@prata0x-plugins` |
 
