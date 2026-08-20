@@ -43,7 +43,12 @@
     {
       "name": "writing",
       "source": "./plugins/writing",
-      "description": "Writer skills for technical docs, blog articles, dev artifacts (commits/PRs/issues), changelogs, meeting notes, and translations, each with a built-in check against generic AI-generated-prose patterns; plus a pre-write context nudge, a fixed-phrase mechanical hook, and an occasional project-wide audit skill for absence-of-writer/rhythm issues."
+      "description": "Writer skills for technical docs, dev artifacts (commits/PRs/issues), changelogs, meeting notes, and translations, each with a built-in check against generic AI-generated-prose patterns; plus a pre-write context nudge, a fixed-phrase mechanical hook, and an occasional project-wide audit skill for absence-of-writer/rhythm issues."
+    },
+    {
+      "name": "blog-pipeline",
+      "source": "./plugins/blog-pipeline",
+      "description": "Write -> review -> translate -> review pipeline for AI-authored blog articles in a site-specific fictional persona voice, parameterized per site by a PERSONA.md convention. Reuses the writing plugin's style-audit agents; adds a fact-checker agent for technical accuracy and translation fidelity."
     }
   ]
 }
