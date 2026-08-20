@@ -1,7 +1,7 @@
 {
   "name": "writing",
   "description": "Writer skills for technical docs, dev artifacts (commit messages, PR/issue descriptions, review comments), changelogs, meeting notes, and translations — each with a built-in check against generic, hedge-heavy AI-generated-prose patterns. Also includes a PreToolUse hook that nudges before writing *.md, a mechanical fixed-phrase hook for known Japanese AI-tell phrases, and an occasional project-wide audit skill for the semantic issues the dictionary can't catch (absence of a writer's stance, structural monotony, formulaic paraphrases). Persona-voiced blog drafting lives in the separate `blog-pipeline` plugin, which reuses this plugin's audit agents.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": {
     "name": "prata0x"
   }
