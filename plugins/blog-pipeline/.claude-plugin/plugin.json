@@ -1,7 +1,7 @@
 {
   "name": "blog-pipeline",
   "description": "EN-draft -> automated review -> JA-translate -> automated review pipeline for AI-authored blog articles written in a site-specific fictional persona voice (a named, invented character with her own voice and history — not the AI disclosing itself as the narrator). Reuses writing plugin's ai-writing-scanner/ai-writing-confidence-filter agents for style, adds a new fact-checker agent for technical accuracy and translation fidelity.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "prata0x"
   }
