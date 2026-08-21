@@ -34,6 +34,15 @@ calls for.
 - **Check how existing `.ja.md` posts on this site render the same
   technical terms** before dictionary-translating one into a calque no
   one else on the site uses.
+- **Watch for false-friend loanwords**: a katakana rendering that sounds
+  like the English term but reads as something else to a Japanese
+  reader (e.g. "claim" → クレーム reads as "complaint", not "to claim/
+  register"). Check what the word actually means to a native reader
+  before using it, not just how it transliterates.
+- **Match Japanese web-prose line conventions**: break at sentence
+  boundaries (each 。) with a paragraph break or a hard line break
+  (trailing two spaces), not English-style dense multi-sentence
+  paragraphs carried over unchanged from the source's block shape.
 - Would a native Japanese speaker who never saw the English source
   actually phrase it this way? If a sentence is obviously calqued from
   English structure, rewrite it.
@@ -56,3 +65,5 @@ Japanese ruleset, plus a fidelity check against the English source.
 | A CTA/example left untouched from the English context | Localized to the Japanese audience |
 | Flipping `draft: false` at this stage | Stays `true` until stage 6 explicitly approves |
 | Guessing a technical term's Japanese rendering | Check how this site's other `.ja.md` posts already render it |
+| Transliterating a term into a false-friend katakana word | Check what the word actually means to a native reader first |
+| One dense paragraph per section, no visual line breaks | Break at each sentence, matching Japanese web-prose convention |

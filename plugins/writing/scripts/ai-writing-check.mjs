@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // 定型フレーズ辞書によるAI臭の機械チェック。日本語のAI生成文で繰り返し指摘される
-// 典型的な定型句のみを対象にする — 語彙レベルの対策は構造・リズム面のAI臭までは
-// 捉えられないが、機械チェックで拾える範囲はここまで、という割り切り。「これにより」
-// 「ではないでしょうか」は通常の接続表現としても使われ、他エントリより誤検知が起き
-// やすい既知のトレードオフ。両hookとも非block(PreToolUseはcontext注入のみ、
-// PostToolUseのexit 2はcontextとして渡るだけ)なので、誤検知があっても書き込み
-// 自体は妨げない。この辞書は陳腐化が速いため定期的な見直しが要る。
+// 典型的な定型句に加え、em dash(—)という言語非依存の記号レベルの臭いも対象にする。
+// 語彙レベルの対策は構造・リズム面のAI臭までは捉えられないが、機械チェックで拾える
+// 範囲はここまで、という割り切り。「これにより」「ではないでしょうか」は通常の接続
+// 表現としても使われ、他エントリより誤検知が起きやすい既知のトレードオフ。両hookとも
+// 非block(PreToolUseはcontext注入のみ、PostToolUseのexit 2はcontextとして渡る
+// だけ)なので、誤検知があっても書き込み自体は妨げない。この辞書は陳腐化が速いため
+// 定期的な見直しが要る。
 //
 // 対象は *.md のうち、AIエージェントの指示ファイル(SKILL.md/CLAUDE.md/AGENTS.md、
 // .claude/skills//agents//rules/ 配下、および本リポジトリのplugin開発レイアウト
@@ -59,6 +60,8 @@ const REASON_CHATBOT_REMNANT =
   'A leftover chatbot-register phrase (もちろんです！/ 承知しました) that doesn\'t belong in written prose. Delete it.'
 const REASON_OVEREMPHASIS =
   'An overemphasis stock phrase (非常に重要です / 極めて重要な意味を持ちます) that asserts importance instead of demonstrating it. Show the specific reason it matters, or cut the phrase.'
+const REASON_EM_DASH =
+  'An em dash (—), a well-documented AI-generation tell in both English and Japanese prose. Split into two sentences, or use a comma/colon/semicolon natural to the surrounding language instead.'
 
 const PATTERNS = [
   { re: 'と言えるでしょう', reason: REASON_HEDGE_CLOSER },
@@ -74,6 +77,7 @@ const PATTERNS = [
   { re: 'もちろんです[！!]', reason: REASON_CHATBOT_REMNANT },
   { re: '非常に重要です', reason: REASON_OVEREMPHASIS },
   { re: '極めて重要な意味を持ちます', reason: REASON_OVEREMPHASIS },
+  { re: '—', reason: REASON_EM_DASH },
 ]
 const COMPILED_PATTERNS = PATTERNS.map(({ re, reason }) => ({ re: new RegExp(re), reason }))
 

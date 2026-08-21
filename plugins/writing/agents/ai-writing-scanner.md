@@ -48,6 +48,14 @@ read more naturally for a human audience.
 - **IS a violation**: narrative or explanatory prose broken into bullets
   purely out of habit, or repeated identical paragraph shapes across
   unrelated sections.
+- **Judge a repeated construction by its rhetorical function, not its
+  surface wording.** "not X, it's Y", "rather than X", "instead of X",
+  and "X does nothing, [correction]" are the same negation-contrast move
+  in different clothes; count them together. When flagging density, name
+  a concrete instance count and a target ceiling (e.g. "9 instances of
+  this construction; ship-ready is 3-4") instead of just "reduce this" —
+  a vague instruction gets satisfied by rewording the same move rather
+  than varying it.
 
 ### C: Formulaic paraphrase not caught by the dictionary
 
@@ -61,8 +69,8 @@ differently enough to evade the fixed-phrase regex.
   と言っても過言ではありません, これにより, 本稿では〜を解説します,
   この記事では〜を解説します, いかがでしたか, 参考になれば幸いです,
   今後の動向に注目, ぜひ試してみて/活用してください, もちろんです！,
-  非常に重要です, 極めて重要な意味を持ちます); re-flagging those here
-  is duplicate noise.
+  非常に重要です, 極めて重要な意味を持ちます, em dashes (—));
+  re-flagging those here is duplicate noise.
 - **IS a violation**: a same-function paraphrase, e.g. "この文章を通じて〜を
   お伝えできればと思います" (paraphrase of a formulaic opener) or "少しでも
   お役に立てば嬉しいです" (paraphrase of a formulaic closer).

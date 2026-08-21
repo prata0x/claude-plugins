@@ -41,6 +41,14 @@ not something the scanner axes cover.
    stop.
 3. Either has blocking findings → revise the article yourself (Edit tool)
    to address them, then re-dispatch both against the revised draft.
+   A style-only edit can silently change or drop a factual claim (a
+   reworded sentence, a merged clause, a register adjustment in
+   translation); always re-dispatch the fact-checker too when a style fix
+   touches a sentence carrying a technical claim, not just the style
+   scan. When a finding names a repeated construction ("reduce the X
+   pattern"), fix it by genuinely varying the underlying rhetorical move
+   — paraphrasing the same move with different words is not a fix and
+   will be re-flagged.
 4. **Cap at 3 rounds.** Still failing after round 3 → stop, report the
    outstanding findings to the user verbatim, and wait for direction. Do
    not keep looping past the cap, and do not ship an article that never
